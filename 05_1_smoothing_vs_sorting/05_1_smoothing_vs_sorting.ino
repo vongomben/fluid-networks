@@ -65,7 +65,7 @@ void loop() {
   Serial.print(" - ");
    // Sort normally
   sortArray(readings, numReadings);
-  Serial.println(readings[numReadings/5]);
+  Serial.println(readings[numReadings/2]);
   
   delay(1);        // delay in between reads for stability
 }
