@@ -3,12 +3,29 @@
 #include <avr/power.h>
 #endif
 
+#include "Ultrasonic.h"
+Ultrasonic ultrasonic(0);
+
+
 #define PIN 3
 
+// Parameter 1 = number of pixels in strip
+// Parameter 2 = Arduino pin number (most are valid)
+// Parameter 3 = pixel type flags, add together as needed:
+//   NEO_KHZ800  800 KHz bitstream (most NeoPixel products w/WS2812 LEDs)
+//   NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
+//   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
+//   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
+//   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, PIN, NEO_GRB + NEO_KHZ800);
 
+// IMPORTANT: To reduce NeoPixel burnout risk, add 1000 uF capacitor across
+// pixel power leads, add 300 - 500 Ohm resistor on first pixel's data input
+// and minimize distance between Arduino and first pixel.  Avoid connecting
+// on a live circuit...if you must, connect GND first.
 
 void setup() {
+  Serial.begin(9600);
   // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
 #if defined (__AVR_ATtiny85__)
   if (F_CPU == 16000000) {
@@ -23,22 +40,69 @@ void setup() {
 }
 
 void loop() {
+
+  long RangeInCentimeters;
+  RangeInCentimeters = ultrasonic.MeasureInCentimeters(); // two measurements should keep an interval
+  //  Serial.println(RangeInCentimeters);//0~400cm
+  int distance = map(RangeInCentimeters, 0, 210, 0,15); // add 20 if you have a bigger ring
+  
+  Serial.println(distance);
+  colorWipe(strip.Color(0, 0, 0), 0);
+  for (int i = 0; i < distance; i = i + 1 ) {
+
+    strip.setPixelColor(i, strip.Color(0, 0, 255));
+        strip.show();
+
+    strip.setPixelColor(i + 1, strip.Color(0, 0, 0));
+    // strip.setPixelColor(i-1, strip.Color(0, 0, 0));
+    strip.show();
+    delay(10);
+  }
+
+  delay(5);
+
+
+  // custom function me made in the video example
+  //myLedFunction(strip.Color(255, 0, 0),strip.Color(0, 255, 0), 50 );
+  //myLedFunction(strip.Color(0, 0, 255),strip.Color(15, 15, 15), 50 );
+
   // Some example procedures showing how to display to the pixels:
-    colorWipe(strip.Color(255, 0, 0), 50); // Red
+  /*  colorWipe(strip.Color(255, 0, 0), 50); // Red
     colorWipe(strip.Color(0, 255, 0), 50); // Green
     colorWipe(strip.Color(0, 0, 255), 50); // Blue
     //colorWipe(strip.Color(0, 0, 0, 255), 50); // White RGBW
     // Send a theater pixel chase in...
-    theaterChase(strip.Color(127, 127, 127), 50); // White
-    theaterChase(strip.Color(127, 0, 0), 50); // Red
-    theaterChase(strip.Color(0, 0, 127), 50); // Blue
+  */
+  // theaterChase(strip.Color(127, 127, 127), 50); // White
+  // theaterChase(strip.Color(127, 0, 0), 50); // Red
+  // theaterChase(strip.Color(0, 0, 127), 50); // Blue
 
-    rainbow(20);
-    rainbowCycle(20);
-    theaterChaseRainbow(50);
+  // rainbow(20);
+  // rainbowCycle(20);
+  // theaterChaseRainbow(50);
 
 
 }
+
+
+void myLedFunction(uint32_t c, uint32_t d, int t) {
+
+  for (int i = 0; i < 16; i++ ) {
+    strip.setPixelColor(i, c);
+    strip.setPixelColor(i - 1, d);
+
+    strip.show();
+    delay(t);
+
+    strip.setPixelColor(i, strip.Color(0, 0, 0));
+    strip.setPixelColor(i - 1, strip.Color(0, 0, 0));
+
+    strip.show();
+    delay(t);
+  }
+
+}
+
 
 // Fill the dots one after the other with a color
 void colorWipe(uint32_t c, uint8_t wait) {
@@ -48,17 +112,6 @@ void colorWipe(uint32_t c, uint8_t wait) {
     delay(wait);
   }
 }
-
-// Fill the dots one after the other with a color
-void colorWipe(uint32_t c, uint8_t wait) {
-    for (uint16_t i = 0; i < strip.numPixels(); i++) {
-        strip.setPixelColor(i, c);
-        strip.show();
-        delay(wait);
-    }
-}
-
-
 
 void rainbow(uint8_t wait) {
   uint16_t i, j;

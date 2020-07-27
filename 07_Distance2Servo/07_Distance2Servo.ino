@@ -4,8 +4,9 @@
   for the Grove Ultrasonic Ranger
   https://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/
   adapted to work with Arduino Grove Carrier (on MKR1010)
-
   https://www.arduino.cc/en/Guide/MKRConnectorCarrier
+  and with Servo
+  
   by Davide Gomba
 
   Library here
