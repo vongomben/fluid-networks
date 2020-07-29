@@ -47,7 +47,7 @@ void loop() {
   // sensor reading
   long RangeInCentimeters;
   RangeInCentimeters = ultrasonic.MeasureInCentimeters(); // two measurements should keep an interval
-  Serial.print("raw data = ");
+ // Serial.print("raw data = ");
   Serial.print(RangeInCentimeters);
   Serial.print(" - ");
 
@@ -72,11 +72,11 @@ void loop() {
   // calculate the average:
   average = total / numReadings;
   // send it to the computer as ASCII digits
-  Serial.print(" average = ");
+ // Serial.print(" average = ");
   Serial.print(average);
   Serial.print(" - ");
   // Sort normally
-  Serial.print(" sorted = ");
+ // Serial.print(" sorted = ");
 
   sortArray(readings, numReadings);
   Serial.println(readings[numReadings / 2]);
