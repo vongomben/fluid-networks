@@ -6,30 +6,30 @@
   in loop take care of using non-blocking method or it will corrupt.
   Alberto Perro & DG - Officine Innesto 2019
 
-  Updated to be the minimal parsing example to to control 
+  Updated to be the minimal parsing example to to control
   the Arduino behaviour throughout a json string sent to topic #hello
 
-  The payload can be either 
+  The payload can be either
 
   {
     "name": "LED",
     "status": "open",
     "pin": 1,
     "color": "red"
-}
+  }
 
-or 
+  or
 
-{
+  {
     "name": "LED",
     "status": "closed",
     "pin": 0,
     "color": "red"
-}
-  
+  }
+
 
 */
-#define BROKER_IP    "192.168.1.6"
+#define BROKER_IP    "192.168.1.0"
 #define DEV_NAME     "mqttdevice"
 #define MQTT_USER    "user"
 #define MQTT_PW      "password"
@@ -97,25 +97,33 @@ void messageReceived(String &topic, String &payload) {
     Serial.println((const char*) myObject["color"]);
   }
 
-  //if (topic == "/hello") {
-  if ((const char*) myObject["status"] == (const char*) "open") {
-    Serial.println("open");
-    digitalWrite(LED_BUILTIN, HIGH);
-  } else if ((const char*) myObject["status"] == "closed") {
-    Serial.println("closed");
-    digitalWrite(LED_BUILTIN, LOW);
-  }
+  if (topic == "/hello") {
+    if (String((const char*)myObject["status"]) == "open") {
+      
+      Serial.println("open");
+      digitalWrite(LED_BUILTIN, HIGH);
+      
+    } else if (String((const char*)myObject["status"]) == "closed") {
 
-/*
-  if ((int) myObject["pin"] == 1) {
-    Serial.println("open");
-    digitalWrite(LED_BUILTIN, HIGH);
-  } else if ((int) myObject["pin"] == 0) {
-    Serial.println("closed");
-    digitalWrite(LED_BUILTIN, LOW);
+      Serial.println("closed");
+      digitalWrite(LED_BUILTIN, LOW);
+ 
+    }
+
+
+    if ((int) myObject["pin"] == 1) {
+
+      Serial.println("open");
+      digitalWrite(LED_BUILTIN, HIGH);
+
+    } else if ((int) myObject["pin"] == 0) {
+ 
+      Serial.println("closed");
+      digitalWrite(LED_BUILTIN, LOW);
+
+    }
+
   }
-*/  
-  //}
 }
 
 void setup() {
