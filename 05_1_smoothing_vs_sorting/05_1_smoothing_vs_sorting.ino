@@ -16,6 +16,11 @@
   This example code is in the public domain.
 
   http://www.arduino.cc/en/Tutorial/Smoothing
+
+  Edited for the Fluid Networks Workshop Example
+  by installing https://github.com/emilv/ArduinoSort Library
+
+  
 */
 #include <ArduinoSort.h>
 

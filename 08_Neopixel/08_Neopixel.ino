@@ -3,10 +3,6 @@
 #include <avr/power.h>
 #endif
 
-#include "Ultrasonic.h"
-Ultrasonic ultrasonic(0);
-
-
 #define PIN 3
 
 // Parameter 1 = number of pixels in strip
@@ -23,6 +19,11 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, PIN, NEO_GRB + NEO_KHZ800);
 // pixel power leads, add 300 - 500 Ohm resistor on first pixel's data input
 // and minimize distance between Arduino and first pixel.  Avoid connecting
 // on a live circuit...if you must, connect GND first.
+
+// https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels
+
+uint32_t rgbcolor = strip.ColorHSV(36, 10, 10);
+uint32_t magenta = strip.Color(255, 0, 255);
 
 void setup() {
   Serial.begin(9600);
@@ -41,23 +42,20 @@ void setup() {
 
 void loop() {
 
-  long RangeInCentimeters;
-  RangeInCentimeters = ultrasonic.MeasureInCentimeters(); // two measurements should keep an interval
-  //  Serial.println(RangeInCentimeters);//0~400cm
-  int distance = map(RangeInCentimeters, 0, 210, 0,15); // add 20 if you have a bigger ring
-  
-  Serial.println(distance);
-  colorWipe(strip.Color(0, 0, 0), 0);
-  for (int i = 0; i < distance; i = i + 1 ) {
+  myLedFunction(rgbcolor, magenta, 50);
 
-    strip.setPixelColor(i, strip.Color(0, 0, 255));
-        strip.show();
+  // colorWipe(strip.Color(255, 0, 0), 50);
+  // colorWipe(strip.Color(0, 0, 0), 50);
+  /* for (int i = 0; i < distance; i = i + 1 ) {
 
-    strip.setPixelColor(i + 1, strip.Color(0, 0, 0));
-    // strip.setPixelColor(i-1, strip.Color(0, 0, 0));
-    strip.show();
-    delay(10);
-  }
+     strip.setPixelColor(i, strip.Color(0, 0, 255));
+         strip.show();
+
+     strip.setPixelColor(i + 1, strip.Color(0, 0, 0));
+     // strip.setPixelColor(i-1, strip.Color(0, 0, 0));
+     strip.show();
+     delay(10);
+    }*/
 
   delay(5);
 
@@ -73,13 +71,13 @@ void loop() {
     //colorWipe(strip.Color(0, 0, 0, 255), 50); // White RGBW
     // Send a theater pixel chase in...
   */
-  // theaterChase(strip.Color(127, 127, 127), 50); // White
-  // theaterChase(strip.Color(127, 0, 0), 50); // Red
-  // theaterChase(strip.Color(0, 0, 127), 50); // Blue
+   theaterChase(strip.Color(127, 127, 127), 50); // White
+   theaterChase(strip.Color(127, 0, 0), 50); // Red
+   theaterChase(strip.Color(0, 0, 127), 50); // Blue
 
-  // rainbow(20);
-  // rainbowCycle(20);
-  // theaterChaseRainbow(50);
+   rainbow(20);
+   rainbowCycle(20);
+   theaterChaseRainbow(50);
 
 
 }
