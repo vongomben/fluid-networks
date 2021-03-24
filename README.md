@@ -26,7 +26,7 @@ We’ve selected what we think is the most easy to use platform nowadays, [Ardui
 
 Note: some parts of the kit were dismissed, as labelled and versioned
 
-| ref | description |      label     |  library | version |
+| Ref | Description |      Label     |  Library | Version |
 |:---:|:-------------------------------------------------------:|:--------------:|:-:|:-:|
 |   1 |                         [MKR1010](https://store.arduino.cc/arduino-mkr-wifi-1010)                         |       MIC      |   | v.2
 |   2 |                  [Grove connector carrier](https://www.arduino.cc/en/Guide/MKRConnectorCarrier)                 |      CONN      |   | v.2
@@ -43,5 +43,5 @@ Note: some parts of the kit were dismissed, as labelled and versioned
 |  13 | Grove - Universal 4 Pin Buckled 50cm Cable (5 PCs Pack) |       HUB      |   | v.2
 |  14 |                     [Grove - I2C Hub](https://wiki.seeedstudio.com/Grove-I2C_Hub/)                     |       HUB      |   | v.2
 |  15 |      [Grove - Gesture Sensor for Arduino (PAJ7620U2)](https://wiki.seeedstudio.com/Grove-Gesture_v1.0/)     |      INPUT     |   | dismissed
-|     |                                                         |                |   |
-|     |                                                         |                |   |
+|  16 |[Grove - IMU 9DOF v2.0 - MPU-9250](https://wiki.seeedstudio.com/Grove-IMU_9DOF_v2.0/)| INPUT |   | v.2
+|  17 |[Grove - Analog Microphone (MEMS)](https://wiki.seeedstudio.com/Grove-Analog-Microphone/) |INPUT |  | v.2
