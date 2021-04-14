@@ -1,17 +1,23 @@
 /*
 
-  Example taken from Seeestudio Wiki
+  Example taken / adapted from Seeestudio Wiki
   for the Grove Ultrasonic Ranger
   https://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/
   adapted to work with Arduino Grove Carrier (on MKR1010)
 
   https://www.arduino.cc/en/Guide/MKRConnectorCarrier
-  by Davide Gomba
+  
+  by Davide Gomba for the Fluid Networks Workshop
 
   Library here
   https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger/archive/master.zip
 
   Install Library Sketch>include Library> Add Zip Library
+
+  Add Ultrasonic Ragnfinder to pin D0 of MKR Carrier
+  Add LED / Pushbutton to pin D5-D6 of MKR Carrier
+
+  
 */
 
 #include "Ultrasonic.h"

@@ -36,7 +36,7 @@ Note: some parts of the kit were dismissed, as labelled and versioned
 |   6 |                   [Grove - RGB LED Ring](https://wiki.seeedstudio.com/Grove%20-%20RGB%20LED%20Ring%20%2820%20-%20WS2813%20Mini%29/)                  |     OUTPUT     |  [Adafruit Neopixel Library](https://github.com/adafruit/adafruit_NeoPixel)  | v.2
 |   7 |            [Grove - Ultrasonic Distance Sensor](https://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/)           |      INPUT     |  [Grove Ultrasonic Library](https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger/archive/master.zip) | v.2
 |   8 |    [Grove - Light Sensor v1.2 - LS06-S phototransistor](https://wiki.seeedstudio.com/Grove-Light_Sensor/)   |      INPUT     |   | v.2
-|   9 |      [Grove - Temperature & Humidity Sensor (DHT11)](https://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)      |      INPUT     | [Grove DHT Library](https://github.com/Seeed-Studio/Grove_Temperature_And_Humidity_Sensor/archive/master.zip)  | v.2
+|   9 |      [Grove - Temperature & Humidity Sensor (DHT11)](https://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)      |      INPUT     | [DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library) and [Adafruit Unified Sensor Lib](https://github.com/adafruit/Adafruit_Sensor)  | v.2
 |  10 |                       [Grove - NFC](https://wiki.seeedstudio.com/Grove_NFC/)                       |      INPUT     |   | v.2
 |  11 |                      [Grove - Servo](https://wiki.seeedstudio.com/Grove-Servo/)                      |     OUTPUT     |   | v.2
 |  12 |               [Grove - 2-Channel SPDT Relay](https://wiki.seeedstudio.com/Grove-2-Channel_SPDT_Relay/)              |     OUTPUT     |   | v.2
