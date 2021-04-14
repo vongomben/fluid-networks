@@ -1,65 +1,67 @@
+// DHT Temperature & Humidity Sensor
+// Unified Sensor Library Example
+// Written by Tony DiCola for Adafruit Industries
+// Released under an MIT license.
 
+// REQUIRES the following Arduino libraries:
+// - DHT Sensor Library: https://github.com/adafruit/DHT-sensor-library
+// - Adafruit Unified Sensor Lib: https://github.com/adafruit/Adafruit_Sensor
 
-// Example testing sketch for various DHT humidity/temperature sensors
-// Written by ladyada, public domain
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+#include <DHT_U.h>
 
+#define DHTPIN 2     // Digital pin connected to the DHT sensor 
+// Feather HUZZAH ESP8266 note: use pins 3, 4, 5, 12, 13 or 14 --
+// Pin 15 can work but DHT must be disconnected during program upload.
 
-#include "DHT.h"
-#include <Wire.h>
+// Uncomment the type of sensor in use:
+#define DHTTYPE    DHT11     // DHT 11
+//#define DHTTYPE    DHT22     // DHT 22 (AM2302)
+//#define DHTTYPE    DHT21     // DHT 21 (AM2301)
 
-#define DHTPIN 2     // what pin we're connected to
+// See guide for details on sensor wiring and usage:
+//   https://learn.adafruit.com/dht/overview
 
-// Uncomment whatever type you're using!
-#define DHTTYPE DHT11   // DHT 11
-//#define DHTTYPE DHT22   // DHT 22  (AM2302)
-//#define DHTTYPE DHT21   // DHT 21 (AM2301)
+DHT_Unified dht(DHTPIN, DHTTYPE);
 
-/*Notice: The DHT10 is different from other DHT* sensor ,it uses i2c interface rather than one wire*/
-/*So it doesn't require a pin.*/
-
-//#define DHTTYPE DHT10
-
-// Connect pin 1 (on the left) of the sensor to +5V
-// Connect pin 2 of the sensor to whatever your DHTPIN is
-// Connect pin 4 (on the right) of the sensor to GROUND
-// Connect a 10K resistor from pin 2 (data) to pin 1 (power) of the sensor
-
-DHT dht(DHTPIN, DHTTYPE);
-
-#if defined(ARDUINO_ARCH_AVR)
-    #define debug  Serial
-
-#elif defined(ARDUINO_ARCH_SAMD) ||  defined(ARDUINO_ARCH_SAM)
-    #define debug  SerialUSB
-#else
-    #define debug  Serial
-#endif
+uint32_t delayMS;
 
 void setup() {
+  Serial.begin(9600);
+  
+  // Initialize device.
+  dht.begin();
 
-    debug.begin(115200);
-    debug.println("DHTxx test!");
-    Wire.begin();
-
-    dht.begin();
+  sensor_t sensor;
+  dht.temperature().getSensor(&sensor);
+  dht.humidity().getSensor(&sensor);
+  delayMS = sensor.min_delay / 1000;
 }
 
 void loop() {
-    float temp_hum_val[2] = {0};
-    // Reading temperature or humidity takes about 250 milliseconds!
-    // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
-
-
-    if (!dht.readTempAndHumidity(temp_hum_val)) {
-        debug.print("Humidity: ");
-        debug.print(temp_hum_val[0]);
-        debug.print(" %\t");
-        debug.print("Temperature: ");
-        debug.print(temp_hum_val[1]);
-        debug.println(" *C");
-    } else {
-        debug.println("Failed to get temprature and humidity value.");
-    }
-
-    delay(1500);
+  // Delay between measurements.
+  delay(delayMS);
+  // Get temperature event and print its value.
+  sensors_event_t event;
+  
+  dht.temperature().getEvent(&event);
+  if (isnan(event.temperature)) {
+    Serial.println(F("Error reading temperature!"));
+  }
+  else {
+    Serial.print(F("Temperature: "));
+    Serial.print(event.temperature);
+    Serial.println(F("°C"));
+  }
+  // Get humidity event and print its value.
+  dht.humidity().getEvent(&event);
+  if (isnan(event.relative_humidity)) {
+    Serial.println(F("Error reading humidity!"));
+  }
+  else {
+    Serial.print(F("Humidity: "));
+    Serial.print(event.relative_humidity);
+    Serial.println(F("%"));
+  }
 }

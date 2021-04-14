@@ -15,13 +15,13 @@ The goal is giving all students the same, personal, one to one educational exper
 
 We also defined some special Learning Units which are called **Projects**. The Student will see how a little project is done, and will be asked to customize or reproduce a similar behaviour - editing and customizing codes Uis to fulfill her/his personal accomplishment.
 
-The Fluid Networks Workshop has been developed and tested during the first Pandemic in 2020, and addressed to several [Istituto Marangoni](https://www.istitutomarangoni.com/en) students, while is being reshaped for Mozilla / Northumrbia University Open Hardware Workshop for the [OpenDoTT PhD Programme](https://opendott.org/).    
+The Fluid Networks Workshop has been developed and tested during the first Pandemic in 2020, and addressed to several [Istituto Marangoni](https://www.istitutomarangoni.com/en) students, while is being reshaped for Mozilla / Northumrbia University Open Hardware Workshop for the [OpenDoTT PhD Programme](https://opendott.org/) ad well as being used for the first and second year of [Cloud Computing as Internet of Things Development Kit at the ITS ICT of Turin](https://www.its-ictpiemonte.it/corsi/cloud-specialist/)    
 
 # Kit (with wiki links)
 
 We’ve scouted all the best tools around, with several goals in mind: good yet inexpensive materials, easily reusable nodes. We’ve also chosen to exclude the breadboard - the most important design tool in Physical Computing and Electronics - from this proposal. Very difficult to debug a short circuit from the Internet.
 
-We’ve selected what we think is the most easy to use platform nowadays, [Arduino MKR 1010](https://store.arduino.cc/arduino-mkr-wifi-1010) (which is part of the broader [MKR family])(https://www.arduino.cc/pro/hardware/product-family/mkr-family?id=1996559), allowing brave students to shift connectivity and uses for their final project) with the widest index of electronics nodes produced by well known Shenzhen based company, **Seeedstudio**: the [Grove Prototyping System](http://wiki.seeedstudio.com/Grove_System/)
+We’ve selected what we think is the most easy to use platform nowadays, [Arduino MKR 1010](https://store.arduino.cc/arduino-mkr-wifi-1010) (which is part of the broader [MKR family](https://www.arduino.cc/pro/hardware/product-family/mkr-family?id=1996559)), allowing brave students to shift connectivity and uses for their final project) with the widest index of electronics nodes produced by well known Shenzhen based company, **Seeedstudio**: the [Grove Prototyping System](http://wiki.seeedstudio.com/Grove_System/)
 
 
 Note: some parts of the kit were dismissed, as labelled and versioned
