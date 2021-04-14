@@ -20,7 +20,7 @@ int led = 5;
 
 Ultrasonic ultrasonic(0);
 
-int val;    // variable to read the value from the analog pin
+int val;    // variable to host the value
 
 void setup()
 {
@@ -32,7 +32,26 @@ void loop()
 {
   long RangeInCentimeters;
   RangeInCentimeters = ultrasonic.MeasureInCentimeters(); // two measurements should keep an interval
-  Serial.println(RangeInCentimeters);//0~400cm
+  Serial.print(RangeInCentimeters);//0~400cm
 
+  // Distance (measures under 1 meter)
+  // Is represented through Light
+  // Above one meter, do nothing!
+
+  val = map(RangeInCentimeters, 0, 60, 255, 0);  // mapping values
+
+  Serial.print(" - ");
+  Serial.println(val);// Priting the Value
+
+  if (RangeInCentimeters > 60) { // if the distance is above 60 cm...
+
+    analogWrite(led, 0); // keep the LED switched off
+
+  } else { // otherwise
+    
+    analogWrite(led, val); //light up the LED on its val value
+  
+  }
+  
   delay(25);
 }
