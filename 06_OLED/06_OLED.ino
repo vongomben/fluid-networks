@@ -1,3 +1,20 @@
+/*
+
+  Simple variable writing on screen based on U8g2 Library DrawStr function
+  --> https://github.com/olikraus/u8g2/wiki/u8g2reference#drawstr
+
+  A text is displayed on the OLED
+  
+  We are using
+  - Seeedstudio Grove Oled Screen on TWI / I2C
+  - Arduino Grove Carrier
+  - Arduino MKR1010
+
+  Fluid Networks / Davide Gomba 04/2021
+
+
+*/
+
 #include <Arduino.h>
 #include <U8g2lib.h>
 

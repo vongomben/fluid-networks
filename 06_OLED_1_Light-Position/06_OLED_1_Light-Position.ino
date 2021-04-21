@@ -1,3 +1,24 @@
+/*
+
+  This code is inspired from a course from Tech Explorations.
+  For information about this course, please see
+ *
+  https://techexplorations.com/so/grove/
+
+  
+  The position of the text is controlled from the amoount of light
+
+  We are using
+  - Seeedstudio Grove Oled Screen on TWI / I2C
+  - Light Sensor on A0
+  - Arduino Grove Carrier
+  - Arduino MKR1010
+
+  Fluid Networks / Davide Gomba 04/2021
+
+
+*/
+
 #include <Arduino.h>
 #include <U8g2lib.h>
 
@@ -22,13 +43,11 @@ void setup(void) {
   Serial.begin(9600);
   u8g2.begin();
   u8g2.setDisplayRotation(U8G2_R2);          // rotations --> https://github.com/olikraus/u8g2/wiki/u8g2reference#setdisplayrotation
-  u8g2.setFont(u8g2_font_fub11_tf);         // here --> https://github.com/olikraus/u8g2/wiki/fntlistall
-
-
+  u8g2.setFont(u8g2_font_fub11_tf);  // set the target font to calculate the pixel width
 
 }
 
-void loop(void) {
+void loop() {
   sensorValue = analogRead(analogInPin);
 
   int x_position = map(sensorValue, 10, 800, 0, 128);
@@ -44,7 +63,5 @@ void loop(void) {
     Serial.println("updated");
     u8g2.clearBuffer(); // clean the display
   }
-
-
 
 }

@@ -9,6 +9,7 @@
   - Seeedstudio Grove Oled Screen on TWI / I2C
   - Ultrasonic Distance Sensor on D0
   - Arduino Grove Carrier
+  - Arduino MKR1010
 
   Fluid Networks / Davide Gomba 04/2021
 
@@ -34,9 +35,8 @@ U8G2_SSD1306_128X64_NONAME_F_SW_I2C u8g2(U8G2_R0,
     /* reset=*/ U8X8_PIN_NONE);
 
 void setup() {
-
+  Serial.begin(9600);
   u8g2.begin();
-
   u8g2.setFont(u8g2_font_fub11_tf);	// set the target font to calculate the pixel width
 }
 
