@@ -6,7 +6,7 @@
   in loop take care of using non-blocking method or it will corrupt.
   Alberto Perro & DG - Officine Innesto 2019
 */
-#define BROKER_IP    "brockerIpAddress"
+#define BROKER_IP    "192.168.1.12"
 #define DEV_NAME     "mqttdevice"
 #define MQTT_USER    "mqtt_user"
 #define MQTT_PW      "mqtt_password"
@@ -74,6 +74,6 @@ void loop() {
  // publish a message roughly every second.
  if (millis() - lastMillis > 1000) {
    lastMillis = millis();
-   client.publish("/hello", "world"); //PUBLISH TO TOPIC /hello MSG world
+  client.publish("/hello", "world"); //PUBLISH TO TOPIC /hello MSG world
  }
 }

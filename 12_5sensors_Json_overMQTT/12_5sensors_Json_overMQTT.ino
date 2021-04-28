@@ -1,13 +1,45 @@
-// DHT Temperature & Humidity Sensor
-// Unified Sensor Library Example
-// Written by Tony DiCola for Adafruit Industries
-// Released under an MIT license.
-
+// This codes assumes you have:
+// - Light sensor on A0
+// - Grove Ultrasonic Ranger on D0
+// - DHT11 on D2
+// - Grove NFC on Serial Port
+//
+//
 // REQUIRES the following Arduino libraries:
 // - DHT Sensor Library: https://github.com/adafruit/DHT-sensor-library
 // - Adafruit Unified Sensor Lib: https://github.com/adafruit/Adafruit_Sensor
-// - Gorve Ultrasonic Ranger Library: https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger
+// - Grove Ultrasonic Ranger Library: https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger
 // - NFC Lirabries for Grove NFC: https://github.com/Seeed-Studio/Seeed_Arduino_NFC
+
+#define BROKER_IP    "serverip"
+#define DEV_NAME     "mqttdevice"
+#define MQTT_USER    "mqtt_user"
+#define MQTT_PW      "mqtt_password"
+
+#include "arduino_secrets.h" 
+
+
+const char ssid[] = SECRET_SSID;
+const char pass[] = SECRET_PASS;
+
+#include <MQTT.h>
+#ifdef ARDUINO_SAMD_MKRWIFI1010
+#include <WiFiNINA.h>
+#elif ARDUINO_SAMD_MKR1000
+#include <WiFi101.h>
+#elif ESP8266
+#include <ESP8266WiFi.h>
+#else
+#error unknown board
+#endif
+WiFiClient net;
+MQTTClient client;
+unsigned long lastMillis = 0;
+
+
+
+#include <Arduino_JSON.h>
+
 
 #if 0
 #include <SPI.h>
@@ -51,15 +83,53 @@ uint32_t delayMS;
 float temp;
 float hum;
 
+void connect() {
+ Serial.print("checking wifi...");
+ while (WiFi.status() != WL_CONNECTED) {
+   Serial.print(".");
+   delay(1000);
+ }
+ Serial.print("\nconnecting...");
+ while (!client.connect(DEV_NAME, MQTT_USER, MQTT_PW)) {
+   Serial.print(".");
+   delay(1000);
+ }
+ Serial.println("\nconnected!");
+ client.subscribe("/hello"); //SUBSCRIBE TO TOPIC /hello
+}
+void messageReceived(String &topic, String &payload) {
+ Serial.println("incoming: " + topic + " - " + payload);
+ if (topic == "/hello") {
+   if (payload == "open") {
+     Serial.println("open");
+     digitalWrite(LED_BUILTIN, HIGH); 
+   } else if (payload == "closed") {
+     Serial.println("closed");
+     digitalWrite(LED_BUILTIN, LOW); 
+   }
+ }
+}
+
 
 void setup() {
   Serial.begin(9600);
+
+  WiFi.begin(ssid, pass);
+ // Note: Local domain names (e.g. "Computer.local" on OSX) are not supported by Arduino.
+ // You need to set the IP address directly.
+ //
+ // MQTT brokers usually use port 8883 for secure connections.
+ client.begin(BROKER_IP, 1883, net);
+ client.onMessage(messageReceived);
+ connect();
+
+  
   // Initialize device.
   dht.begin();
 
 
 
-Serial.println(F("DHTxx Unified Sensor Example"));
+  Serial.println(F("DHTxx Unified Sensor Example"));
   // Print temperature sensor details.
   sensor_t sensor;
   dht.temperature().getSensor(&sensor);
@@ -106,16 +176,23 @@ Serial.println(F("DHTxx Unified Sensor Example"));
 }
 
 void loop() {
-// Get temperature event and print its value.
+
+  client.loop();
+ if (!client.connected()) {
+   connect();
+ }
+
+  
+  // Get temperature event and print its value.
   sensors_event_t event;
   dht.temperature().getEvent(&event);
   if (isnan(event.temperature)) {
     Serial.println(F("Error reading temperature!"));
   }
   else {
-   
+
     temp = event.temperature;
-    
+
   }
   // Get humidity event and print its value.
   dht.humidity().getEvent(&event);
@@ -123,9 +200,9 @@ void loop() {
     Serial.println(F("Error reading humidity!"));
   }
   else {
-    
+
     hum = event.relative_humidity;
-   
+
   }
   code = "unkwonwn";
 
@@ -177,26 +254,34 @@ void loop() {
 
   // read temperature
   delay(delayMS);
-//  sensors_event_t event;
-//  dht.temperature().getEvent(&event);
+  //  sensors_event_t event;
+  //  dht.temperature().getEvent(&event);
 
   // Read humidity
-//  dht.humidity().getEvent(&event);
+  //  dht.humidity().getEvent(&event);
 
-  Serial.print("Brightness: " );
-  Serial.print(light) ;
-  Serial.print(" Distance: ");//0400cm
-  Serial.print(RangeInCentimeters);//0400cm
-  Serial.print(" cm ");
-  Serial.print(" Temperature: ");
-  Serial.print(temp);
-  Serial.print("°C ");
-  Serial.print(" Humidity: ");
-  Serial.print(hum);
-  Serial.print(" % ");
-  Serial.print("code: ");
-  Serial.print(code);
-  Serial.println();
+  // put everything ina Json Object
+
+  JSONVar myObject;
+
+  myObject["Brightness"] = light;
+  myObject["Distance"] = RangeInCentimeters;
+  myObject["Temperature"] = temp;
+  myObject["Humidity"] = hum;
+  myObject["code"] = code;
+
+// JSON.stringify(myVar) can be used to convert the json var to a String
+  String jsonString = JSON.stringify(myObject);
+
+    Serial.println(myObject);
+client.publish("/hello", jsonString);
+delay(1000);
+// publish a message roughly every second.
+// if (millis() - lastMillis > 1000) {
+//   lastMillis = millis();
+//  client.publish("/hello", myObject); //PUBLISH TO TOPIC /hello MSG world
+// }
+  
 
 
 }

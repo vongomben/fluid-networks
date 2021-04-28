@@ -1,13 +1,19 @@
-// DHT Temperature & Humidity Sensor
-// Unified Sensor Library Example
-// Written by Tony DiCola for Adafruit Industries
-// Released under an MIT license.
-
+// This codes assumes you have:
+// - Light sensor on A0
+// - Grove Ultrasonic Ranger on D0
+// - DHT11 on D2
+// - Grove NFC on Serial Port
+//
+//
 // REQUIRES the following Arduino libraries:
 // - DHT Sensor Library: https://github.com/adafruit/DHT-sensor-library
 // - Adafruit Unified Sensor Lib: https://github.com/adafruit/Adafruit_Sensor
-// - Gorve Ultrasonic Ranger Library: https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger
+// - Grove Ultrasonic Ranger Library: https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger
 // - NFC Lirabries for Grove NFC: https://github.com/Seeed-Studio/Seeed_Arduino_NFC
+
+
+#include <Arduino_JSON.h>
+
 
 #if 0
 #include <SPI.h>
@@ -59,7 +65,7 @@ void setup() {
 
 
 
-Serial.println(F("DHTxx Unified Sensor Example"));
+  Serial.println(F("DHTxx Unified Sensor Example"));
   // Print temperature sensor details.
   sensor_t sensor;
   dht.temperature().getSensor(&sensor);
@@ -106,16 +112,16 @@ Serial.println(F("DHTxx Unified Sensor Example"));
 }
 
 void loop() {
-// Get temperature event and print its value.
+  // Get temperature event and print its value.
   sensors_event_t event;
   dht.temperature().getEvent(&event);
   if (isnan(event.temperature)) {
     Serial.println(F("Error reading temperature!"));
   }
   else {
-   
+
     temp = event.temperature;
-    
+
   }
   // Get humidity event and print its value.
   dht.humidity().getEvent(&event);
@@ -123,9 +129,9 @@ void loop() {
     Serial.println(F("Error reading humidity!"));
   }
   else {
-    
+
     hum = event.relative_humidity;
-   
+
   }
   code = "unkwonwn";
 
@@ -177,26 +183,28 @@ void loop() {
 
   // read temperature
   delay(delayMS);
-//  sensors_event_t event;
-//  dht.temperature().getEvent(&event);
+  //  sensors_event_t event;
+  //  dht.temperature().getEvent(&event);
 
   // Read humidity
-//  dht.humidity().getEvent(&event);
+  //  dht.humidity().getEvent(&event);
 
-  Serial.print("Brightness: " );
-  Serial.print(light) ;
-  Serial.print(" Distance: ");//0400cm
-  Serial.print(RangeInCentimeters);//0400cm
-  Serial.print(" cm ");
-  Serial.print(" Temperature: ");
-  Serial.print(temp);
-  Serial.print("°C ");
-  Serial.print(" Humidity: ");
-  Serial.print(hum);
-  Serial.print(" % ");
-  Serial.print("code: ");
-  Serial.print(code);
-  Serial.println();
+  // put everything ina Json Object
+
+  JSONVar myObject;
+
+  myObject["Brightness"] = light;
+  myObject["Distance"] = RangeInCentimeters;
+  myObject["Temperature"] = temp;
+  myObject["Humidity"] = hum;
+  myObject["code"] = code;
+
+// JSON.stringify(myVar) can be used to convert the json var to a String
+  String jsonString = JSON.stringify(myObject);
+
+    Serial.println(myObject);
+    delay(1000);
+  
 
 
 }
