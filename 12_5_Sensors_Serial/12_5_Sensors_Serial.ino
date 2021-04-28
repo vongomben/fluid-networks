@@ -11,10 +11,6 @@
 // - Grove Ultrasonic Ranger Library: https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger
 // - NFC Lirabries for Grove NFC: https://github.com/Seeed-Studio/Seeed_Arduino_NFC
 
-
-#include <Arduino_JSON.h>
-
-
 #if 0
 #include <SPI.h>
 #include <PN532_SPI.h>
@@ -191,34 +187,21 @@ void loop() {
 
   // put everything ina Json Object
 
-  JSONVar myObject;
-
-  myObject["Brightness"] = light;
-  myObject["Distance"] = RangeInCentimeters;
-  myObject["Temperature"] = temp;
-  myObject["Humidity"] = hum;
-  myObject["code"] = code;
-
-// JSON.stringify(myVar) can be used to convert the json var to a String
-  String jsonString = JSON.stringify(myObject);
-
-    Serial.println(myObject);
-    delay(1000);
-  
-//  Serial.print("Brightness: " );
-//  Serial.print(light) ;
-//  Serial.print(" Distance: ");//0400cm
-//  Serial.print(RangeInCentimeters);//0400cm
-//  Serial.print(" cm ");
-//  Serial.print(" Temperature: ");
-//  Serial.print(temp);
-//  Serial.print("°C ");
-//  Serial.print(" Humidity: ");
-//  Serial.print(hum);
-//  Serial.print(" % ");
-//  Serial.print("code: ");
-//  Serial.print(code);
-//  Serial.println();
+ 
+  Serial.print("Brightness: " );
+  Serial.print(light) ;
+  Serial.print(" Distance: ");//0400cm
+  Serial.print(RangeInCentimeters);//0400cm
+  Serial.print(" cm ");
+  Serial.print(" Temperature: ");
+  Serial.print(temp);
+  Serial.print("°C ");
+  Serial.print(" Humidity: ");
+  Serial.print(hum);
+  Serial.print(" % ");
+  Serial.print("code: ");
+  Serial.print(code);
+  Serial.println();
 
 
 }
