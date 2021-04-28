@@ -11,7 +11,6 @@
 // - Grove Ultrasonic Ranger Library: https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger
 // - NFC Lirabries for Grove NFC: https://github.com/Seeed-Studio/Seeed_Arduino_NFC
 
-
 #include <Arduino_JSON.h>
 
 
@@ -57,9 +56,9 @@ uint32_t delayMS;
 float temp;
 float hum;
 
-
 void setup() {
   Serial.begin(9600);
+
   // Initialize device.
   dht.begin();
 
@@ -112,6 +111,13 @@ void setup() {
 }
 
 void loop() {
+
+  client.loop();
+  if (!client.connected()) {
+    connect();
+  }
+
+
   // Get temperature event and print its value.
   sensors_event_t event;
   dht.temperature().getEvent(&event);
@@ -199,12 +205,12 @@ void loop() {
   myObject["Humidity"] = hum;
   myObject["code"] = code;
 
-// JSON.stringify(myVar) can be used to convert the json var to a String
+  // JSON.stringify(myVar) can be used to convert the json var to a String
   String jsonString = JSON.stringify(myObject);
 
-    Serial.println(myObject);
-    delay(1000);
-  
+  Serial.println(myObject);
+  delay(1000);
+
 
 
 }
