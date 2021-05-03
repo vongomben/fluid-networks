@@ -112,12 +112,6 @@ void setup() {
 
 void loop() {
 
-  client.loop();
-  if (!client.connected()) {
-    connect();
-  }
-
-
   // Get temperature event and print its value.
   sensors_event_t event;
   dht.temperature().getEvent(&event);
@@ -208,7 +202,7 @@ void loop() {
   // JSON.stringify(myVar) can be used to convert the json var to a String
   String jsonString = JSON.stringify(myObject);
 
-  Serial.println(myObject);
+  Serial.println(jsonString);
   delay(1000);
 
 
