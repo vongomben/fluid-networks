@@ -1,2 +1,2 @@
-#define SECRET_SSID "Cerbiatto"
-#define SECRET_PASS "parall3l0!"
+#define SECRET_SSID "ssd"
+#define SECRET_PASS "password"
