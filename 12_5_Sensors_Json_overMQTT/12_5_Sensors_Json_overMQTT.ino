@@ -11,7 +11,7 @@
 // - Grove Ultrasonic Ranger Library: https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger
 // - NFC Lirabries for Grove NFC: https://github.com/Seeed-Studio/Seeed_Arduino_NFC
 
-#define BROKER_IP    "serverip"
+#define BROKER_IP    "192.168.0.15"
 #define DEV_NAME     "mqttdevice"
 #define MQTT_USER    "mqtt_user"
 #define MQTT_PW      "mqtt_password"
@@ -273,7 +273,7 @@ void loop() {
 // JSON.stringify(myVar) can be used to convert the json var to a String
   String jsonString = JSON.stringify(myObject);
 
-    Serial.println(myObject);
+    Serial.println(jsonString);
 client.publish("/hello", jsonString);
 delay(1000);
 // publish a message roughly every second.

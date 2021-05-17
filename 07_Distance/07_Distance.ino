@@ -1,4 +1,4 @@
-/*
+ /*
 
   Example taken from Seeestudio Wiki
   for the Grove Ultrasonic Ranger
@@ -16,6 +16,7 @@
 
 #include "Ultrasonic.h"
 
+
 int led = 5;
 
 Ultrasonic ultrasonic(0);
@@ -27,12 +28,21 @@ void setup()
   Serial.begin(9600);
   pinMode(led, OUTPUT);
 
+
 }
 void loop()
 {
   long RangeInCentimeters;
   RangeInCentimeters = ultrasonic.MeasureInCentimeters(); // two measurements should keep an interval
   Serial.println(RangeInCentimeters);//0~400cm
+
+//  if (RangeInCentimeters < 15){
+//
+//   
+//    Serial.println(RangeInCentimeters);
+//    
+//    }
+  
 
   delay(25);
 }

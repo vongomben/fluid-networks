@@ -6,12 +6,14 @@
   in loop take care of using non-blocking method or it will corrupt.
   Alberto Perro & DG - Officine Innesto 2019
 */
-#define BROKER_IP    "192.168.1.12"
+
+#define BROKER_IP    "broker.hivemq.com"
+// #define BROKER_IP    "192.168.1.9"
 #define DEV_NAME     "mqttdevice"
 #define MQTT_USER    "mqtt_user"
 #define MQTT_PW      "mqtt_password"
 
-#include "arduino_secrets.h" 
+#include "arduino_secrets.h"
 
 
 const char ssid[] = SECRET_SSID;
@@ -30,50 +32,53 @@ WiFiClient net;
 MQTTClient client;
 unsigned long lastMillis = 0;
 void connect() {
- Serial.print("checking wifi...");
- while (WiFi.status() != WL_CONNECTED) {
-   Serial.print(".");
-   delay(1000);
- }
- Serial.print("\nconnecting...");
- while (!client.connect(DEV_NAME, MQTT_USER, MQTT_PW)) {
-   Serial.print(".");
-   delay(1000);
- }
- Serial.println("\nconnected!");
- client.subscribe("/hello"); //SUBSCRIBE TO TOPIC /hello
+  Serial.print("checking wifi...");
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(1000);
+  }
+  Serial.print("\nconnecting...");
+  while (!client.connect(DEV_NAME, MQTT_USER, MQTT_PW)) {
+    Serial.print(".");
+    delay(1000);
+  }
+  Serial.println("\nconnected!");
+  client.subscribe("/hello01"); //SUBSCRIBE TO TOPIC /hello
 }
 void messageReceived(String &topic, String &payload) {
- Serial.println("incoming: " + topic + " - " + payload);
- if (topic == "/hello") {
-   if (payload == "open") {
-     Serial.println("open");
-     digitalWrite(LED_BUILTIN, HIGH); 
-   } else if (payload == "closed") {
-     Serial.println("closed");
-     digitalWrite(LED_BUILTIN, LOW); 
-   }
- }
+  Serial.println("incoming: " + topic + " - " + payload);
+  if (topic == "/hello01") {
+    if (payload == "open") {
+      Serial.println("open");
+      digitalWrite(LED_BUILTIN, HIGH);
+      client.publish("/alert01", "Led ON"); //PUBLISH TO TOPIC /hello MSG world
+    } else if (payload == "closed") {
+      Serial.println("closed");
+      digitalWrite(LED_BUILTIN, LOW);
+      client.publish("/alert01", "Led OFF"); //PUBLISH TO TOPIC /hello MSG world
+
+    }
+  }
 }
 void setup() {
- Serial.begin(115200);
- WiFi.begin(ssid, pass);
- // Note: Local domain names (e.g. "Computer.local" on OSX) are not supported by Arduino.
- // You need to set the IP address directly.
- //
- // MQTT brokers usually use port 8883 for secure connections.
- client.begin(BROKER_IP, 1883, net);
- client.onMessage(messageReceived);
- connect();
+  Serial.begin(115200);
+  WiFi.begin(ssid, pass);
+  // Note: Local domain names (e.g. "Computer.local" on OSX) are not supported by Arduino.
+  // You need to set the IP address directly.
+  //
+  // MQTT brokers usually use port 8883 for secure connections.
+  client.begin(BROKER_IP, 1883, net);
+  client.onMessage(messageReceived);
+  connect();
 }
 void loop() {
- client.loop();
- if (!client.connected()) {
-   connect();
- }
- // publish a message roughly every second.
- if (millis() - lastMillis > 1000) {
-   lastMillis = millis();
-  client.publish("/hello", "world"); //PUBLISH TO TOPIC /hello MSG world
- }
+  client.loop();
+  if (!client.connected()) {
+    connect();
+  }
+  // publish a message roughly every second.
+  if (millis() - lastMillis > 1000) {
+    lastMillis = millis();
+    client.publish("/hello01", "world"); //PUBLISH TO TOPIC /hello MSG world
+  }
 }
