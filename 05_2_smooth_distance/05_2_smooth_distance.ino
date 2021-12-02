@@ -17,8 +17,10 @@
 
   http://www.arduino.cc/en/Tutorial/Smoothing
 */
+
 #include <ArduinoSort.h>
 #include "Ultrasonic.h"
+
 Ultrasonic ultrasonic(0);
 // Define the number of samples to keep track of. The higher the number, the
 // more the readings will be smoothed, but the slower the output will respond to

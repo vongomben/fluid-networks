@@ -11,7 +11,7 @@
 // - Grove Ultrasonic Ranger Library: https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger
 // - NFC Lirabries for Grove NFC: https://github.com/Seeed-Studio/Seeed_Arduino_NFC
 
-#define BROKER_IP    "192.168.0.15"
+#define BROKER_IP    "broker.hivemq.com"
 #define DEV_NAME     "mqttdevice"
 #define MQTT_USER    "mqtt_user"
 #define MQTT_PW      "mqtt_password"
@@ -155,23 +155,7 @@ void setup() {
   // Set delay between sensor readings based on sensor details.
   delayMS = sensor.min_delay / 1000;
 
-  // initialize NFC
-  nfc.begin();
-
-  uint32_t versiondata = nfc.getFirmwareVersion();
-  if (! versiondata) {
-    Serial.print("Didn't find PN53x board");
-    while (1); // halt
-  }
-  // Got ok data, print it out!
-  Serial.print("Found chip PN5"); Serial.println((versiondata >> 24) & 0xFF, HEX);
-  Serial.print("Firmware ver. "); Serial.print((versiondata >> 16) & 0xFF, DEC);
-  Serial.print('.'); Serial.println((versiondata >> 8) & 0xFF, DEC);
-
-  // configure board to read RFID tags
-  nfc.SAMConfig();
-
-  Serial.println("Waiting for an ISO14443A Card ...");
+ 
 
 }
 
@@ -204,45 +188,7 @@ void loop() {
     hum = event.relative_humidity;
 
   }
-  code = "unkwonwn";
-
-  uint8_t success;
-  uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  // Buffer to store the returned UID
-  uint8_t uidLength;                        // Length of the UID (4 or 7 bytes depending on ISO14443A card type)
-
-  // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
-  // 'uid' will be populated with the UID, and uidLength will indicate
-  // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
-  success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
-
-  if (success) {
-    // nfc.PrintHex(uid, uidLength);
-    if (uidLength == 4) {
-      // Code to String
-
-
-      code = String(uid[0]);
-      code += String(uid[1]);
-      code += String(uid[2]);
-      code += String(uid[3]);
-      Serial.print("code = ");
-      Serial.print(code);
-    } else if (uidLength == 7) {
-      // Code to String
-
-
-      code = String(uid[0]);
-      code += String(uid[1]);
-      code += String(uid[2]);
-      code += String(uid[3]);
-      code += String(uid[4]);
-      code += String(uid[5]);
-      code += String(uid[6]);
-      //  Serial.print("code = ");
-      //  Serial.print(code);
-    }
-  }
-
+ 
 
   // read distance
 
@@ -268,14 +214,13 @@ void loop() {
   myObject["Distance"] = RangeInCentimeters;
   myObject["Temperature"] = temp;
   myObject["Humidity"] = hum;
-  myObject["code"] = code;
 
 // JSON.stringify(myVar) can be used to convert the json var to a String
   String jsonString = JSON.stringify(myObject);
 
-    Serial.println(jsonString);
-client.publish("/hello", jsonString);
-delay(1000);
+    Serial.println(myObject);
+    client.publish("/hello", jsonString);
+    delay(5000);
 // publish a message roughly every second.
 // if (millis() - lastMillis > 1000) {
 //   lastMillis = millis();

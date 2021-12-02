@@ -45,3 +45,32 @@ Note: some parts of the kit were dismissed, as labelled and versioned
 |  15 |      [Grove - Gesture Sensor for Arduino (PAJ7620U2)](https://wiki.seeedstudio.com/Grove-Gesture_v1.0/)     |      INPUT     |   | dismissed
 |  16 |[Grove - IMU 9DOF v2.0 - MPU-9250](https://wiki.seeedstudio.com/Grove-IMU_9DOF_v2.0/)| INPUT |   | v.2
 |  17 |[Grove - Analog Microphone (MEMS)](https://wiki.seeedstudio.com/Grove-Analog-Microphone/) |INPUT |  | v.2
+
+# Examples
+
+Most examples start with a number, and are willing to give a concise and self-explanatory guide to use the sensor with the corresponding board of the kit hookoed up with the MKR Connector Carrier-
+
+- 01 Blink LED
+- 02 Pushbutton
+- 03 Debounce a Pushbutton
+- 04 Servo (loop, knob)
+- 05 Analog In & Oit with Serial Port, and how to process data using smoothing and sorting
+- 06 OLED uses
+- 07 Distance Sensor
+- 08 Basic Use of Neopixel
+- 09 Basic use of Gesture Sensor
+- 10 Using MKR as HID device
+- 11 DHT (Temperature & Humidity Sensor)
+- 12 Exercise: reading 4 sensors in the serial port
+- 13 Basic Use of NFC reader (using Serial)
+- 14 TBD
+- 15 Basic MQTT use
+- 16 MQTT with JSON condition
+- 17 Sending a NFC reading using MQTT via JSON
+- 18 TBD
+- 19 TBD
+- 20 Exercise: Sending 4 sensors readings via JSON over MQTT
+- 21 Blynk Neopixel Example
+
+
+##

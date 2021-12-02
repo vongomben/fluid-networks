@@ -39,12 +39,12 @@
 
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
-char auth[] = "your-blynk-token";
+char auth[] = "Auth-Token";
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
-char ssid[] = "your-wifi-ssid";
-char pass[] = "your-wifi-pasw";
+char ssid[] = "ssid";
+char pass[] = "pasw";
 
 #include <Adafruit_NeoPixel.h>
 #ifdef __AVR__
