@@ -67,9 +67,9 @@ Most examples start with a number, and are willing to give a concise and self-ex
 - 15 Basic MQTT use
 - 16 MQTT with JSON condition
 - 17 Sending a NFC reading using MQTT via JSON
-- 18 TBD
-- 19 TBD
-- 20 Exercise: Sending 4 sensors readings via JSON over MQTT
+- 18 [Exercise: Sending 2 sensors readings via JSON over MQTT](https://github.com/vongomben/fluid-networks/tree/master/18_2-sensors-Json-over-MQTT)
+- 19 [Exercise: Sending 3 sensors readings via JSON over MQTT](https://github.com/vongomben/fluid-networks/tree/master/19_3-sensors-Json-over-MQTT)
+- 20 [Exercise: Sending 4 sensors readings via JSON over MQTT](https://github.com/vongomben/fluid-networks/blob/master/20_4-sensors-Json-over-MQTT/20_4-sensors-Json-over-MQTT.ino)
 - 21 Blynk Neopixel Example
 
 
