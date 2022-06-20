@@ -1,5 +1,5 @@
 # Fluid Networks
-Teaching Physical Computing Remotely / A Syllabus and Educational Proposal 
+Teaching Physical Computing Remotely / A Syllabus and Educational Proposal  
 This is the official repository and documentation for the **Fluid Networks Workshop**
 
 ## What is the Fluid Networks Workshop?
