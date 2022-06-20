@@ -1,33 +1,22 @@
- /*
-
-  Example taken from Seeestudio Wiki
-  for the Grove Ultrasonic Ranger
-  https://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/
-  adapted to work with Arduino Grove Carrier (on MKR1010)
-
-  https://www.arduino.cc/en/Guide/MKRConnectorCarrier
-  by Davide Gomba
-
-  Library here
-  https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger/archive/master.zip
-
-  Install Library Sketch>include Library> Add Zip Library
-*/
+#include <Servo.h>
 
 #include "Ultrasonic.h"
 
 
 int led = 5;
-
+Servo myservo; 
 Ultrasonic ultrasonic(0);
 
 int val;    // variable to read the value from the analog pin
-
+int posa = 75;
+int posb = 30;
 void setup()
 {
   Serial.begin(9600);
   pinMode(led, OUTPUT);
+    myservo.attach(5);  // attaches the servo on pin 4 to the servo object
 
+myservo.write(posb);
 
 }
 void loop()
@@ -36,12 +25,24 @@ void loop()
   RangeInCentimeters = ultrasonic.MeasureInCentimeters(); // two measurements should keep an interval
   Serial.println(RangeInCentimeters);//0~400cm
 
-//  if (RangeInCentimeters < 15){
-//
-//   
+
+myservo.write(posb);
+ if (RangeInCentimeters < 15){
 //    Serial.println(RangeInCentimeters);
-//    
-//    }
+
+ for (int i = posb; i < posa; i = i + 1) {
+    myservo.write(i);
+    Serial.begin(i);
+    delay(2); // decrease this number in order to have a more fluid movement
+  }
+  for (int i = posa; i > posb; i = i - 1) {
+    myservo.write(i);
+    Serial.begin(i);
+    delay(2); // decrease this number in order to have a more fluid movement
+  }
+delay(3000);
+    
+    }
   
 
   delay(25);

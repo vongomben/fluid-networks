@@ -29,14 +29,24 @@
 
 
 */
-#define BROKER_IP    "192.168.1.0"
+
+#define BROKER_IP    "broker.hivemq.com"
 #define DEV_NAME     "mqttdevice"
-#define MQTT_USER    "user"
-#define MQTT_PW      "password"
-const char ssid[] = "wifi_ssid";
-const char pass[] = "wifi_password";
+#define MQTT_USER    "mqtt_user"
+#define MQTT_PW      "mqtt_password"
+#define MQTT_SUB     "/hello02"
+#define MQTT_PUB     "/hello01"
+
+#include "arduino_secrets.h"
+
+const char ssid[] = SECRET_SSID;
+const char pass[] = SECRET_PASS;
+
 #include <MQTT.h>
-#ifdef ARDUINO_SAMD_MKRWIFI1010
+
+#ifdef WIO_TERMINAL
+#include "rpcWiFi.h"
+#elif ARDUINO_SAMD_MKRWIFI1010
 #include <WiFiNINA.h>
 #elif ARDUINO_SAMD_MKR1000
 #include <WiFi101.h>
@@ -45,8 +55,10 @@ const char pass[] = "wifi_password";
 #else
 #error unknown board
 #endif
+
 WiFiClient net;
 MQTTClient client;
+
 unsigned long lastMillis = 0;
 
 #include <Arduino_JSON.h>
@@ -63,12 +75,15 @@ void connect() {
     delay(1000);
   }
   Serial.println("\nconnected!");
-  client.subscribe("/hello"); //SUBSCRIBE TO TOPIC /hello
+  client.subscribe(MQTT_SUB); //SUBSCRIBE TO TOPIC /hello
 }
 
 void messageReceived(String &topic, String &payload) {
+  
   Serial.println("incoming: " + topic + " - " + payload);
+  
   JSONVar myObject = JSON.parse(payload);
+  
   //Serial.println(JSON.typeof(myObject));
 
   if (myObject.hasOwnProperty("name")) {
@@ -129,14 +144,12 @@ void messageReceived(String &topic, String &payload) {
 void setup() {
   Serial.begin(115200);
   WiFi.begin(ssid, pass);
+  
   pinMode(LED_BUILTIN, OUTPUT);
 
-  // Note: Local domain names (e.g. "Computer.local" on OSX) are not supported by Arduino.
-  // You need to set the IP address directly.
-  //
-  // MQTT brokers usually use port 8883 for secure connections.
   client.begin(BROKER_IP, 1883, net);
   client.onMessage(messageReceived);
+  
   connect();
 }
 void loop() {
@@ -144,9 +157,10 @@ void loop() {
   if (!client.connected()) {
     connect();
   }
+  
   // publish a message roughly every second.
   if (millis() - lastMillis > 1000) {
     lastMillis = millis();
-    //  client.publish("/hello", "world"); //PUBLISH TO TOPIC /hello MSG world
+    //  client.publish(MQTT_PUB, "world"); //PUBLISH TO TOPIC /hello MSG world
   }
 }
