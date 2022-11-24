@@ -16,10 +16,8 @@ Reading a card and sending it, as a json string, to a Node-REd server via MQTT
 #define MQTT_SUB     "/hello02"
 #define MQTT_PUB     "/hello01"
 
-#include "arduino_secrets.h"
-
-const char ssid[] = SECRET_SSID;
-const char pass[] = SECRET_PASS;
+const char ssid[] = "SSID-Name";
+const char pass[] = "SSID-Password";
 
 #include <MQTT.h>
 
