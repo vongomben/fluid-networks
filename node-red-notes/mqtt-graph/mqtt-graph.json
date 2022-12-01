@@ -1,0 +1,239 @@
+[
+    {
+        "id": "6a09197fb6d60465",
+        "type": "mqtt in",
+        "z": "5a5cd8c9a97f355c",
+        "name": "",
+        "topic": "/ITS_DATA1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "a9c2cbecb3ac2335",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 810,
+        "y": 1960,
+        "wires": [
+            [
+                "c11697aac6f22a51",
+                "d4dd32c029d66d8c",
+                "873f8abad8446aaa"
+            ]
+        ]
+    },
+    {
+        "id": "c11697aac6f22a51",
+        "type": "debug",
+        "z": "5a5cd8c9a97f355c",
+        "name": "debug 30",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "44f08bc6986688a1",
+        "type": "ui_chart",
+        "z": "5a5cd8c9a97f355c",
+        "name": "",
+        "group": "cd81d08b.eebb3",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1250,
+        "y": 1940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d4dd32c029d66d8c",
+        "type": "change",
+        "z": "5a5cd8c9a97f355c",
+        "name": "crea hum",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.hum",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "hum",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 1940,
+        "wires": [
+            [
+                "44f08bc6986688a1"
+            ]
+        ]
+    },
+    {
+        "id": "873f8abad8446aaa",
+        "type": "change",
+        "z": "5a5cd8c9a97f355c",
+        "name": "crea temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temp",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "temp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 1980,
+        "wires": [
+            [
+                "44f08bc6986688a1"
+            ]
+        ]
+    },
+    {
+        "id": "1df8577dd7d36a65",
+        "type": "inject",
+        "z": "5a5cd8c9a97f355c",
+        "name": "Erase Data from Graph",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "x": 980,
+        "y": 1880,
+        "wires": [
+            [
+                "44f08bc6986688a1"
+            ]
+        ]
+    },
+    {
+        "id": "c9897b7690581234",
+        "type": "comment",
+        "z": "5a5cd8c9a97f355c",
+        "name": "receive and display 2 data from a JSON object via MQTTT subscription ",
+        "info": "",
+        "x": 1010,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "a9c2cbecb3ac2335",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "cd81d08b.eebb3",
+        "type": "ui_group",
+        "z": "5a5cd8c9a97f355c",
+        "name": "Default",
+        "tab": "b34078e6.e60df8",
+        "order": 1,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b34078e6.e60df8",
+        "type": "ui_tab",
+        "z": "5a5cd8c9a97f355c",
+        "name": "Home",
+        "icon": "dashboard"
+    }
+]

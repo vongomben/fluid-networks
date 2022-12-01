@@ -1,0 +1,124 @@
+[
+    {
+        "id": "d399a1188ae9957e",
+        "type": "debug",
+        "z": "1ae94b859e627067",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "293a95dbd1bb48c5",
+        "type": "inject",
+        "z": "1ae94b859e627067",
+        "name": "starting json",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"alert\":1,\"text\":\"ciao\",\"lat\":45.43912451944641,\"lon\":7.827994525543856}",
+        "payloadType": "json",
+        "x": 450,
+        "y": 2000,
+        "wires": [
+            [
+                "b98213de27fa7cd6",
+                "f95b7dcb90cf1987",
+                "b9b1f098eb50d9c5"
+            ]
+        ]
+    },
+    {
+        "id": "b98213de27fa7cd6",
+        "type": "change",
+        "z": "1ae94b859e627067",
+        "name": "change",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.diga",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 1960,
+        "wires": [
+            [
+                "d399a1188ae9957e"
+            ]
+        ]
+    },
+    {
+        "id": "f95b7dcb90cf1987",
+        "type": "template",
+        "z": "1ae94b859e627067",
+        "name": "Template",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"alert\":\"{{payload.alert}}\",\n    \"text\":\"{{payload.text}}\",\n    \"lat\":{{payload.lat}},\n    \"lon\":{{payload.lon}},\n    \"diga\": true\n}\n\n\n\n",
+        "output": "json",
+        "x": 640,
+        "y": 2000,
+        "wires": [
+            [
+                "d399a1188ae9957e"
+            ]
+        ]
+    },
+    {
+        "id": "b9b1f098eb50d9c5",
+        "type": "function",
+        "z": "1ae94b859e627067",
+        "name": "Function",
+        "func": "msg.payload.diga = true; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 2040,
+        "wires": [
+            [
+                "d399a1188ae9957e"
+            ]
+        ]
+    },
+    {
+        "id": "ee67c92cd8c37f85",
+        "type": "comment",
+        "z": "1ae94b859e627067",
+        "name": "Adding a JSON parameter, \"Diga\" as \"True\" on the go (in 3 ways)",
+        "info": "",
+        "x": 650,
+        "y": 1900,
+        "wires": []
+    }
+]

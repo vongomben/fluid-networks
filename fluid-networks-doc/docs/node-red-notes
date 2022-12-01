@@ -1,0 +1,27 @@
+
+
+
+
+??? example "node-red flow"
+
+    [{"id":"3b5dc31.f13743c","type":"inject","z":"c6b51061.867b8","name":"","props":[{"p":"payload","v":"","vt":"date"},{"p":"topic","v":"","vt":"string"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"","payloadType":"date","x":240,"y":220,"wires":[["2255cfcf.886c6"]]},{"id":"2255cfcf.886c6","type":"http request","z":"c6b51061.867b8","name":"","method":"GET","ret":"txt","paytoqs":"ignore","url":"https://s-o-b.eu/home/","tls":"","persist":false,"proxy":"","authType":"bearer","x":460,"y":220,"wires":[["e74a6b0e.5da5d8","d773ff4d.72d63"]]}]
+
+
+
+
+
+
+
+
+
+    :smile:
+
+``` title="Blink"
+--8<-- "index.md"
+```
+
+!!! note "Phasellus posuere in sem ut cursus"
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.

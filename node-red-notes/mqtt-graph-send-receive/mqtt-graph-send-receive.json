@@ -1,0 +1,523 @@
+[
+    {
+        "id": "440a70a03d4b0fea",
+        "type": "mqtt out",
+        "z": "5a5cd8c9a97f355c",
+        "name": "",
+        "topic": "/ITS_DATA1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a9c2cbecb3ac2335",
+        "x": 570,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "01b78794d70f231f",
+        "type": "inject",
+        "z": "5a5cd8c9a97f355c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload.hum",
+                "v": "$random()*10",
+                "vt": "jsonata"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload.temp",
+                "v": "$random()*100",
+                "vt": "jsonata"
+            },
+            {
+                "p": "payload.name",
+                "v": "Sonda-001",
+                "vt": "str"
+            },
+            {
+                "p": "payload.lat",
+                "v": "45.07",
+                "vt": "num"
+            },
+            {
+                "p": "payload.lon",
+                "v": "7.69",
+                "vt": "num"
+            },
+            {
+                "p": "payload.alert",
+                "v": "false",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 330,
+        "y": 1860,
+        "wires": [
+            [
+                "86b56f873d39dceb",
+                "440a70a03d4b0fea"
+            ]
+        ]
+    },
+    {
+        "id": "86b56f873d39dceb",
+        "type": "debug",
+        "z": "5a5cd8c9a97f355c",
+        "name": "debug 29",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 1940,
+        "wires": []
+    },
+    {
+        "id": "6a09197fb6d60465",
+        "type": "mqtt in",
+        "z": "5a5cd8c9a97f355c",
+        "name": "",
+        "topic": "/ITS_DATA1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "a9c2cbecb3ac2335",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 810,
+        "y": 1960,
+        "wires": [
+            [
+                "c11697aac6f22a51",
+                "d4dd32c029d66d8c",
+                "873f8abad8446aaa",
+                "4979a04d5e95558b"
+            ]
+        ]
+    },
+    {
+        "id": "c11697aac6f22a51",
+        "type": "debug",
+        "z": "5a5cd8c9a97f355c",
+        "name": "debug 30",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "44f08bc6986688a1",
+        "type": "ui_chart",
+        "z": "5a5cd8c9a97f355c",
+        "name": "",
+        "group": "cd81d08b.eebb3",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Sonda-001",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1210,
+        "y": 1940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d4dd32c029d66d8c",
+        "type": "change",
+        "z": "5a5cd8c9a97f355c",
+        "name": "crea hum",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.hum",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "hum",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 1940,
+        "wires": [
+            [
+                "44f08bc6986688a1"
+            ]
+        ]
+    },
+    {
+        "id": "873f8abad8446aaa",
+        "type": "change",
+        "z": "5a5cd8c9a97f355c",
+        "name": "crea temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temp",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "temp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 1980,
+        "wires": [
+            [
+                "44f08bc6986688a1"
+            ]
+        ]
+    },
+    {
+        "id": "1df8577dd7d36a65",
+        "type": "inject",
+        "z": "5a5cd8c9a97f355c",
+        "name": "Erase Data from Graph",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "x": 980,
+        "y": 1880,
+        "wires": [
+            [
+                "44f08bc6986688a1"
+            ]
+        ]
+    },
+    {
+        "id": "c9897b7690581234",
+        "type": "comment",
+        "z": "5a5cd8c9a97f355c",
+        "name": "receive and display 2 data from a JSON object via MQTT subscription ",
+        "info": "",
+        "x": 1010,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "c4f7a6edf26f94e4",
+        "type": "ui_worldmap",
+        "z": "5a5cd8c9a97f355c",
+        "group": "6715c1ad48796778",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "hide",
+        "layers": "hide",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 1460,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "16ca443f9692f20f",
+        "type": "inject",
+        "z": "5a5cd8c9a97f355c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload.hum",
+                "v": "$random()*10",
+                "vt": "jsonata"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload.temp",
+                "v": "$random()*100",
+                "vt": "jsonata"
+            },
+            {
+                "p": "payload.name",
+                "v": "Sonda-001",
+                "vt": "str"
+            },
+            {
+                "p": "payload.lat",
+                "v": "45.07",
+                "vt": "num"
+            },
+            {
+                "p": "payload.lon",
+                "v": "7.69",
+                "vt": "num"
+            },
+            {
+                "p": "payload.alert",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "25",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 330,
+        "y": 1920,
+        "wires": [
+            [
+                "440a70a03d4b0fea"
+            ]
+        ]
+    },
+    {
+        "id": "4979a04d5e95558b",
+        "type": "switch",
+        "z": "5a5cd8c9a97f355c",
+        "name": "check alert",
+        "property": "payload.alert",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1030,
+        "y": 2080,
+        "wires": [
+            [
+                "905f2a1ed138b936"
+            ],
+            [
+                "66fe2aca1519c8c6"
+            ]
+        ]
+    },
+    {
+        "id": "905f2a1ed138b936",
+        "type": "change",
+        "z": "5a5cd8c9a97f355c",
+        "name": "icona teschio",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.icon",
+                "pt": "msg",
+                "to": ":skull:",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1210,
+        "y": 2060,
+        "wires": [
+            [
+                "c4f7a6edf26f94e4"
+            ]
+        ]
+    },
+    {
+        "id": "66fe2aca1519c8c6",
+        "type": "change",
+        "z": "5a5cd8c9a97f355c",
+        "name": "icona map marker",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.icon",
+                "pt": "msg",
+                "to": "fa-map-marker",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1230,
+        "y": 2100,
+        "wires": [
+            [
+                "c4f7a6edf26f94e4"
+            ]
+        ]
+    },
+    {
+        "id": "6a5985cbda868bc9",
+        "type": "comment",
+        "z": "5a5cd8c9a97f355c",
+        "name": "send  2 data from a JSON object via MQTT (with alert)",
+        "info": "",
+        "x": 420,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "a9c2cbecb3ac2335",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "cd81d08b.eebb3",
+        "type": "ui_group",
+        "z": "5a5cd8c9a97f355c",
+        "name": "Default",
+        "tab": "b34078e6.e60df8",
+        "order": 1,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6715c1ad48796778",
+        "type": "ui_group",
+        "name": "map",
+        "tab": "b34078e6.e60df8",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b34078e6.e60df8",
+        "type": "ui_tab",
+        "z": "5a5cd8c9a97f355c",
+        "name": "Home",
+        "icon": "dashboard"
+    }
+]
