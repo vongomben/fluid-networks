@@ -19,9 +19,14 @@
 */
 
 #include <ArduinoSort.h>
-#include "Ultrasonic.h"
 
-Ultrasonic ultrasonic(0);
+int sensorPin2 = A2;    // select the input pin for the potentiometer
+int sensorPin3 = A3;
+int sensorPin4 = A4;
+int ledPin = 13;      // select the pin for the LED
+int sensorValue2 = 0;  // variable to store the value coming from the sensor
+int sensorValue3 = 0;
+int sensorValue4 = 0;
 // Define the number of samples to keep track of. The higher the number, the
 // more the readings will be smoothed, but the slower the output will respond to
 // the input. Using a constant rather than a normal variable lets us use this
@@ -33,7 +38,6 @@ int readIndex = 0;              // the index of the current reading
 int total = 0;                  // the running total
 int average = 0;                // the average
 
-int inputPin = A0;
 
 void setup() {
   // initialize serial communication with computer:
@@ -46,19 +50,15 @@ void setup() {
 
 void loop() {
 
-  // sensor reading
-  long RangeInCentimeters;
-  RangeInCentimeters = ultrasonic.MeasureInCentimeters(); // two measurements should keep an interval
-  Serial.print(" rawdata ");
-  Serial.print(RangeInCentimeters);
-  //Serial.print(" - ");
-
+sensorValue2 = analogRead(sensorPin2);
+  sensorValue3 = analogRead(sensorPin3);
+  sensorValue4 = analogRead(sensorPin4);
   // data processing
   // subtract the last reading:
   total = total - readings[readIndex];
   // read from the sensor:
   //  readings[readIndex] = analogRead(inputPin); // analog data
-  readings[readIndex] = RangeInCentimeters;
+  readings[readIndex] = sensorValue2;
 
   // add the reading to the total:
   total = total + readings[readIndex];
