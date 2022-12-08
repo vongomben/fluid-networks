@@ -4,6 +4,7 @@ nav:
     - Home: index.md
     - Microcontrollers: micro.md
     - Kit: kit.md
+    - Node-RED: node-red-notes.md
 
 theme:
   name: material
@@ -40,9 +41,12 @@ theme:
   palette: 
     # Palette toggle for dark mode
     - scheme: slate
+      palette: deep purple
+      primary: indigo
+      accent: deep orange
       toggle:
         icon: material/brightness-4
-        name: Switch to light mode
+        name: Switch to light mode        
     # Palette toggle for light mode
     - scheme: default
       toggle:
