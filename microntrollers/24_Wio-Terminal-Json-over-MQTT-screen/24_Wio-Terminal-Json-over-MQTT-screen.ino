@@ -13,6 +13,12 @@
 //
 //[{"id":"11b29ac4408c235b","type":"mqtt in","z":"d17c141483c2dce8","name":"","topic":"/hello01","qos":"2","datatype":"auto-detect","broker":"b29d2b67cc1cf089","nl":false,"rap":true,"rh":0,"inputs":0,"x":510,"y":240,"wires":[["5bbf387071538f86"]]},{"id":"5bbf387071538f86","type":"debug","z":"d17c141483c2dce8","name":"debug 20","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","statusVal":"","statusType":"auto","x":680,"y":240,"wires":[]},{"id":"ecacca4ef80fef73","type":"inject","z":"d17c141483c2dce8","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"open","payloadType":"str","x":510,"y":300,"wires":[["5d3d0f9287b7dadc"]]},{"id":"5d3d0f9287b7dadc","type":"mqtt out","z":"d17c141483c2dce8","name":"","topic":"/hello02","qos":"","retain":"","respTopic":"","contentType":"","userProps":"","correl":"","expiry":"","broker":"b29d2b67cc1cf089","x":680,"y":300,"wires":[]},{"id":"b29d2b67cc1cf089","type":"mqtt-broker","name":"","broker":"broker.hivemq.com","port":"1883","clientid":"","autoConnect":true,"usetls":false,"protocolVersion":"4","keepalive":"60","cleansession":true,"birthTopic":"","birthQos":"0","birthPayload":"","birthMsg":{},"closeTopic":"","closeQos":"0","closePayload":"","closeMsg":{},"willTopic":"","willQos":"0","willPayload":"","willMsg":{},"userProps":"","sessionExpiry":""}]
 
+// declare MQTT library 
+
+#include <MQTT.h>
+
+// declare MQTT parameters 
+
 #define BROKER_IP "broker.hivemq.com"
 #define DEV_NAME "mqttdevice"
 #define MQTT_USER "mqtt_user"
@@ -20,10 +26,8 @@
 #define MQTT_SUB "/hello02"
 #define MQTT_PUB "/hello01"
 
-const char ssid[] = "SSID-Name";
-const char pass[] = "SSID-Password";
-
-#include <MQTT.h>
+// calling the specific WIFI library, based on differet boards you may be using. 
+// Tested with Wio Terminal and Arduino MKR 1010
 
 #ifdef WIO_TERMINAL
 #include "rpcWiFi.h"
@@ -36,6 +40,9 @@ const char pass[] = "SSID-Password";
 #else
 #error unknown board
 #endif
+
+const char ssid[] = "SSID-Name";
+const char pass[] = "SSID-Password";
 
 WiFiClient net;
 MQTTClient client;
