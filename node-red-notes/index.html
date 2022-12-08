@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://example.com/node-red-notes/" rel="canonical"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.1, mkdocs-material-8.5.10" name="generator"/>
+<title>Node-RED - fluid-networks</title>
+<link href="../assets/stylesheets/main.472b142f.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.08040f6c.min.css" rel="stylesheet"/>
+<style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h226.7c17 0 33.3-6.7 45.3-18.7l93.3-93.3c12-12 18.7-28.3 18.7-45.3V96c0-35.3-28.7-64-64-64H64zm0 64h320v224h-64c-17.7 0-32 14.3-32 32v64H64V96z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M96 0C43 0 0 43 0 96v320c0 53 43 96 96 96h320c17.7 0 32-14.3 32-32s-14.3-32-32-32v-64c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H96zm0 384h256v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16h192c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48h192c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0 0 114.6 0 256s114.6 256 256 256zm-40-176h24v-64h-24c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-80c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M480 32c0-12.9-7.8-24.6-19.8-29.6S434.5.2 425.3 9.3L381.7 53c-48 48-113.1 75-181 75H64c-35.3 0-64 28.7-64 64v96c0 35.3 28.7 64 64 64v128c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32V352h8.7c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V300.4c18.6-8.8 32-32.5 32-60.4s-13.4-51.6-32-60.4V32zm-64 76.7v262.6C357.2 317.8 280.5 288 200.7 288H192v-96h8.7c79.8 0 156.5-29.8 215.3-83.3z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0 0 114.6 0 256s114.6 256 256 256zm-86.2-346.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1 0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6-13.3 0-24-10.7-24-24v-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1 0-8.4-6.8-15.1-15.1-15.1h-58.3c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM288 352c0 17.7-14.3 32-32 32s-32-14.3-32-32 14.3-32 32-32 32 14.3 32 32z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7.2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8.2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24v112c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224c0-17.7-14.3-32-32-32s-32 14.3-32 32 14.3 32 32 32 32-14.3 32-32z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.1 52.4 442.6 6.5c-1.9-3.9-6.1-6.5-10.5-6.5s-8.5 2.6-10.4 6.5l-16.5 45.9-46 16.8c-4.3 1.6-7.3 5.9-7.2 10.4 0 4.5 3 8.7 7.2 10.2l45.7 16.8 16.8 45.8c1.5 4.4 5.8 7.5 10.4 7.5s8.9-3.1 10.4-7.5l16.5-45.8 45.7-16.8c4.2-1.5 7.2-5.7 7.2-10.2 0-4.6-3-8.9-7.2-10.4l-45.6-16.8zm-132.4 53c-12.5-12.5-32.8-12.5-45.3 0l-2.9 2.9c-22-8-45.8-12.3-70.5-12.3C93.1 96 0 189.1 0 304s93.1 208 208 208 208-93.1 208-208c0-24.7-4.3-48.5-12.2-70.5l2.9-2.9c12.5-12.5 12.5-32.8 0-45.3l-80-80zM200 192c-57.4 0-104 46.6-104 104v8c0 8.8-7.2 16-16 16s-16-7.2-16-16v-8c0-75.1 60.9-136 136-136h8c8.8 0 16 7.2 16 16s-7.2 16-16 16h-8z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 398.9c58.5-41.1 96-104.1 96-174.9C512 100.3 397.4 0 256 0S0 100.3 0 224c0 70.7 37.5 133.8 96 174.9V464c0 26.5 21.5 48 48 48h48v-48c0-8.8 7.2-16 16-16s16 7.2 16 16v48h64v-48c0-8.8 7.2-16 16-16s16 7.2 16 16v48h48c26.5 0 48-21.5 48-48v-65.1zM224 256c0 35.3-28.7 64-64 64s-64-28.7-64-64 28.7-64 64-64 64 28.7 64 64zm128 64c-35.3 0-64-28.7-64-64s28.7-64 64-64 64 28.7 64 64-28.7 64-64 64z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M320 0c17.7 0 32 14.3 32 32v64h128c35.3 0 64 28.7 64 64v288c0 35.3-28.7 64-64 64H160c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64h128V32c0-17.7 14.3-32 32-32zM208 384c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32zM264 256c0-22.1-17.9-40-40-40s-40 17.9-40 40 17.9 40 40 40 40-17.9 40-40zm152 40c22.1 0 40-17.9 40-40s-17.9-40-40-40-40 17.9-40 40 17.9 40 40 40zM48 224h16v192H48c-26.5 0-48-21.5-48-48v-96c0-26.5 21.5-48 48-48zm544 0c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48h-16V224h16z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M288 0H128c-17.7 0-32 14.3-32 32s14.3 32 32 32v132.8c0 11.8-3.3 23.5-9.5 33.5L10.3 406.2C3.6 417.2 0 429.7 0 442.6 0 480.9 31.1 512 69.4 512h309.2c38.3 0 69.4-31.1 69.4-69.4 0-12.8-3.6-25.4-10.3-36.4L329.5 230.4c-6.2-10.1-9.5-21.7-9.5-33.5V64c17.7 0 32-14.3 32-32S337.7 0 320 0h-32zm-96 196.8V64h64v132.8c0 23.7 6.6 46.9 19 67.1l34.5 56.1h-171l34.5-56.1c12.4-20.2 19-43.4 19-67.1z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64V216z"/></svg>');}</style>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="deep-orange" data-md-color-primary="indigo" data-md-color-scheme="slate" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#using-context">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--lifted" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="fluid-networks" class="md-header__button md-logo" data-md-component="logo" href=".." title="fluid-networks">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            fluid-networks
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Node-RED
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="deep-orange" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="default" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+</form>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/vongomben/fluid-networks" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.6 10.59 8.38 4.8l1.69 1.7c-.24.85.15 1.78.93 2.23v5.54c-.6.34-1 .99-1 1.73a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0-.74-.4-1.39-1-1.73V9.41l2.07 2.09c-.07.15-.07.32-.07.5a2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2c-.18 0-.35 0-.5.07L13.93 7.5a1.98 1.98 0 0 0-1.15-2.34c-.43-.16-.88-.2-1.28-.09L9.8 3.38l.79-.78c.78-.79 2.04-.79 2.82 0l7.99 7.99c.79.78.79 2.04 0 2.82l-7.99 7.99c-.78.79-2.04.79-2.82 0L2.6 13.41c-.79-.78-.79-2.04 0-2.82Z"></path></svg>
+</div>
+<div class="md-source__repository">
+    vongomben/fluid-networks
+  </div>
+</a>
+</div>
+</nav>
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="..">
+      Home
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../micro/">
+      Microcontrollers
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../kit/">
+      Kit
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="./">
+      Node-RED
+    </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="fluid-networks" class="md-nav__button md-logo" data-md-component="logo" href=".." title="fluid-networks">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    fluid-networks
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/vongomben/fluid-networks" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.6 10.59 8.38 4.8l1.69 1.7c-.24.85.15 1.78.93 2.23v5.54c-.6.34-1 .99-1 1.73a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0-.74-.4-1.39-1-1.73V9.41l2.07 2.09c-.07.15-.07.32-.07.5a2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2c-.18 0-.35 0-.5.07L13.93 7.5a1.98 1.98 0 0 0-1.15-2.34c-.43-.16-.88-.2-1.28-.09L9.8 3.38l.79-.78c.78-.79 2.04-.79 2.82 0l7.99 7.99c.79.78.79 2.04 0 2.82l-7.99 7.99c-.78.79-2.04.79-2.82 0L2.6 13.41c-.79-.78-.79-2.04 0-2.82Z"></path></svg>
+</div>
+<div class="md-source__repository">
+    vongomben/fluid-networks
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../micro/">
+        Microcontrollers
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../kit/">
+        Kit
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Node-RED
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Node-RED
+      </a>
+<nav aria-label="On this page" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#using-context">
+    Using Context
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#add-a-json-value-on-the-go-3-ways">
+    add a JSON value on the go (3 ways)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#adding-a-json-parameter-on-the-go-3-ways">
+    Adding a JSON Parameter on the go (3 ways)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#concatenate-can-api-call-3-ways">
+    Concatenate can API call (3 ways)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mqtt-graph">
+    MQTT Graph
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mqtt-graph-send-receive-with-map">
+    MQTT Graph Send &amp; Receive (with MAP!)
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/vongomben/fluid-networks/edit/master/docs/node-red-notes.md" title="Edit this page">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
+</a>
+<h1>Node-RED</h1>
+<p>Most of these examples are meant to be helping side notes to hack with during Node-RED editing, reminding how different solutions could be in Node-RED</p>
+<h2 id="using-context">Using Context<a class="headerlink" href="#using-context" title="Permanent link">¶</a></h2>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/context/context.PNG"><img alt="Using Context" src="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/context/context.PNG"/></a></p>
+<details class="note">
+<summary>Play with Context Flow</summary>
+<p>[{"id":"b96068f7babe718b","type":"inject","z":"c6b51061.867b8","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"black","payloadType":"str","x":410,"y":2520,"wires":[["55fccf9286018ccb"]]},{"id":"55fccf9286018ccb","type":"change","z":"c6b51061.867b8","name":"","rules":[{"t":"set","p":"payload","pt":"flow","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":580,"y":2520,"wires":[["1b6609d1d59d9ea9"]]},{"id":"1b6609d1d59d9ea9","type":"debug","z":"c6b51061.867b8","name":"debug 20","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","statusVal":"","statusType":"auto","x":760,"y":2520,"wires":[]},{"id":"a33941ace6c88833","type":"inject","z":"c6b51061.867b8","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"","payloadType":"date","x":400,"y":2660,"wires":[["cea608f4c035d618"]]},{"id":"019808d44e69ee0e","type":"debug","z":"c6b51061.867b8","name":"debug 21","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":760,"y":2660,"wires":[]},{"id":"cea608f4c035d618","type":"change","z":"c6b51061.867b8","name":"","rules":[{"t":"set","p":"payload","pt":"msg","to":"payload","tot":"flow"}],"action":"","property":"","from":"","to":"","reg":false,"x":580,"y":2660,"wires":[["019808d44e69ee0e"]]},{"id":"0a98032fac0d4255","type":"inject","z":"c6b51061.867b8","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"white","payloadType":"str","x":410,"y":2440,"wires":[["804e8fb34671bbe7"]]},{"id":"804e8fb34671bbe7","type":"change","z":"c6b51061.867b8","name":"","rules":[{"t":"set","p":"payload","pt":"flow","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":580,"y":2440,"wires":[["8d1f48e5caf6a773"]]},{"id":"8d1f48e5caf6a773","type":"debug","z":"c6b51061.867b8","name":"debug 22","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","statusVal":"","statusType":"auto","x":760,"y":2440,"wires":[]},{"id":"d2dc68b89abc00b9","type":"comment","z":"c6b51061.867b8","name":"store data in flow.payload","info":"","x":350,"y":2380,"wires":[]},{"id":"cd9b8abe76e88e2c","type":"comment","z":"c6b51061.867b8","name":"log flow.payload","info":"","x":380,"y":2600,"wires":[]},{"id":"eb76c839396c374f","type":"inject","z":"c6b51061.867b8","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"green","payloadType":"str","x":410,"y":2900,"wires":[["0ced793d5836d79d"]]},{"id":"0ced793d5836d79d","type":"change","z":"c6b51061.867b8","name":"","rules":[{"t":"set","p":"payload","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":590,"y":2900,"wires":[["d4ae35a2aeddbeb6"]]},{"id":"d4ae35a2aeddbeb6","type":"debug","z":"c6b51061.867b8","name":"debug 23","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","statusVal":"","statusType":"auto","x":780,"y":2900,"wires":[]},{"id":"a38b7aff4966e25c","type":"inject","z":"c6b51061.867b8","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"red","payloadType":"str","x":410,"y":2820,"wires":[["22e824f2daddf75c"]]},{"id":"22e824f2daddf75c","type":"change","z":"c6b51061.867b8","name":"","rules":[{"t":"set","p":"payload","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":590,"y":2820,"wires":[["3fd47c04974ba5fa"]]},{"id":"3fd47c04974ba5fa","type":"debug","z":"c6b51061.867b8","name":"debug 24","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","statusVal":"","statusType":"auto","x":780,"y":2820,"wires":[]},{"id":"dac57d4c504705db","type":"comment","z":"c6b51061.867b8","name":"store data in global.payload","info":"","x":340,"y":2760,"wires":[]},{"id":"96a28af554244902","type":"inject","z":"c6b51061.867b8","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"","payloadType":"date","x":400,"y":3040,"wires":[["03efa499d78e52a6"]]},{"id":"34d255d61b7e4c51","type":"debug","z":"c6b51061.867b8","name":"debug 25","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":760,"y":3040,"wires":[]},{"id":"03efa499d78e52a6","type":"change","z":"c6b51061.867b8","name":"","rules":[{"t":"set","p":"payload","pt":"msg","to":"payload","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":580,"y":3040,"wires":[["34d255d61b7e4c51"]]},{"id":"a04a28fea60fc1a8","type":"comment","z":"c6b51061.867b8","name":"log global.payload","info":"","x":370,"y":2980,"wires":[]}]</p>
+</details>
+<h2 id="add-a-json-value-on-the-go-3-ways">add a JSON value on the go (3 ways)<a class="headerlink" href="#add-a-json-value-on-the-go-3-ways" title="Permanent link">¶</a></h2>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/create-json/create-json.png"><img alt="Adding JSON Value" src="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/create-json/create-json.png"/></a></p>
+<details class="note">
+<summary>Create JSON Flow</summary>
+<p>[{"id":"d89cb479.b37858","type":"inject","z":"382e6c42.8e461c","name":"","topic":"","payload":"Davide","payloadType":"str","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":470,"y":840,"wires":[["9a5e36d6.f5a6a8","577abe41.681d2","d6b21205.8cf03"]]},{"id":"9a5e36d6.f5a6a8","type":"template","z":"382e6c42.8e461c","name":"Template","field":"payload","fieldType":"msg","format":"json","syntax":"mustache","template":"{\n    \"employment\":\"teacher\",\n    \"name\":\"{{payload}}\"\n    \n} ","output":"json","x":640,"y":840,"wires":[["a8793535.13abf8"]]},{"id":"a8793535.13abf8","type":"debug","z":"382e6c42.8e461c","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":850,"y":840,"wires":[]},{"id":"577abe41.681d2","type":"function","z":"382e6c42.8e461c","name":"Function","func":"msg.payload = {\"employment\":\"teacher\",\"name\":msg.payload}; \nreturn msg;","outputs":1,"noerr":0,"x":650,"y":900,"wires":[["a8793535.13abf8"]]},{"id":"d850824e.ce9cd","type":"comment","z":"382e6c42.8e461c","name":"Cretae JSON on the go (in 3 ways)","info":"","x":600,"y":700,"wires":[]},{"id":"d6b21205.8cf03","type":"change","z":"382e6c42.8e461c","name":"Jsonata / Change","rules":[{"t":"set","p":"payload","pt":"msg","to":"{\"employment\":\"teacher\",\"name\":payload}","tot":"jsonata"}],"action":"","property":"","from":"","to":"","reg":false,"x":670,"y":780,"wires":[["a8793535.13abf8"]]}]</p>
+</details>
+<h2 id="adding-a-json-parameter-on-the-go-3-ways">Adding a JSON Parameter on the go (3 ways)<a class="headerlink" href="#adding-a-json-parameter-on-the-go-3-ways" title="Permanent link">¶</a></h2>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/adding-json/adding-json.PNG"><img alt="Adding name/value Pair in Json" src="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/adding-json/adding-json.PNG"/></a> </p>
+<details class="note">
+<summary>Adding a JSON Parameter on the go, in 3 different ways node-red flow</summary>
+<p>[{"id":"d399a1188ae9957e","type":"debug","z":"c6b51061.867b8","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","statusVal":"","statusType":"auto","x":810,"y":1880,"wires":[]},{"id":"293a95dbd1bb48c5","type":"inject","z":"c6b51061.867b8","name":"starting json","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"alert\":1,\"text\":\"ciao\",\"lat\":45.43912451944641,\"lon\":7.827994525543856}","payloadType":"json","x":430,"y":1880,"wires":[["b98213de27fa7cd6","f95b7dcb90cf1987","b9b1f098eb50d9c5"]]},{"id":"b98213de27fa7cd6","type":"change","z":"c6b51061.867b8","name":"change","rules":[{"t":"set","p":"payload.diga","pt":"msg","to":"true","tot":"bool"}],"action":"","property":"","from":"","to":"","reg":false,"x":620,"y":1840,"wires":[["d399a1188ae9957e"]]},{"id":"f95b7dcb90cf1987","type":"template","z":"c6b51061.867b8","name":"Template","field":"payload","fieldType":"msg","format":"json","syntax":"mustache","template":"{\n    \"alert\":\"{{payload.alert}}\",\n    \"text\":\"{{payload.text}}\",\n    \"lat\":{{payload.lat}},\n    \"lon\":{{payload.lon}},\n    \"diga\": true\n}\n\n\n\n","output":"json","x":620,"y":1880,"wires":[["d399a1188ae9957e"]]},{"id":"b9b1f098eb50d9c5","type":"function","z":"c6b51061.867b8","name":"Function","func":"msg.payload.diga = true; \nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":620,"y":1920,"wires":[["d399a1188ae9957e"]]},{"id":"ee67c92cd8c37f85","type":"comment","z":"c6b51061.867b8","name":"Adding a JSON parameter, \"Diga\" as \"True\" on the go (in 3 ways)","info":"","x":630,"y":1780,"wires":[]}]</p>
+</details>
+<h2 id="concatenate-can-api-call-3-ways">Concatenate can API call (3 ways)<a class="headerlink" href="#concatenate-can-api-call-3-ways" title="Permanent link">¶</a></h2>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/concatenate-api/concatenate-api.PNG"><img alt="Play with JSON data coming from an API" src="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/concatenate-api/concatenate-api.PNG"/></a></p>
+<details class="note">
+<summary>Concatenate JSON parameters form an API flow</summary>
+<p>[{"id":"61190ff5.85eec","type":"http request","z":"382e6c42.8e461c","name":"API Call","method":"GET","ret":"obj","paytoqs":false,"url":"https://api.fisenko.net/v1/quotes/en/random","tls":"","persist":false,"proxy":"","authType":"","x":520,"y":1120,"wires":[["f0fb2304.cdd8f","c2b1eddf.0c5eb","c221498f.e05d58"]]},{"id":"f0fb2304.cdd8f","type":"change","z":"382e6c42.8e461c","name":"jsonata","rules":[{"t":"set","p":"payload","pt":"msg","to":"'Text is: ' &amp; payload.text &amp; ' Author is' &amp; payload.author.name","tot":"jsonata"}],"action":"","property":"","from":"","to":"","reg":false,"x":700,"y":1060,"wires":[["a1156bfb.552f68"]]},{"id":"e527e6e9.a5ddb8","type":"comment","z":"382e6c42.8e461c","name":"Concatenate an API call (in 3 ways)","info":"","x":660,"y":980,"wires":[]},{"id":"c8f195ba.91c368","type":"inject","z":"382e6c42.8e461c","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":440,"y":1060,"wires":[["61190ff5.85eec"]]},{"id":"c2b1eddf.0c5eb","type":"template","z":"382e6c42.8e461c","name":"","field":"payload","fieldType":"msg","format":"handlebars","syntax":"mustache","template":"Text is: {{payload.text}} \n\nAuthor: {{payload.author.name}}","output":"str","x":700,"y":1100,"wires":[["a1156bfb.552f68"]]},{"id":"a1156bfb.552f68","type":"debug","z":"382e6c42.8e461c","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":890,"y":1080,"wires":[]},{"id":"c221498f.e05d58","type":"function","z":"382e6c42.8e461c","name":"Function","func":"var t1 = 'Text is:';\nvar t2 = msg.payload.text; \nvar t3 = ' Author: ';\nvar t4 =  msg.payload.author.name;\n\nmsg.payload = t1 + t2 + t3 + t4;\n\nreturn msg;","outputs":1,"noerr":0,"x":700,"y":1140,"wires":[["a1156bfb.552f68"]]}]</p>
+</details>
+<h2 id="mqtt-graph">MQTT Graph<a class="headerlink" href="#mqtt-graph" title="Permanent link">¶</a></h2>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/mqtt-graph/mqtt-graph.PNG"><img alt="receive and display 2 data from a JSON object via MQTTT subscription" src="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/mqtt-graph/mqtt-graph.PNG"/></a></p>
+<details class="note">
+<summary>receive and display 2 data from a JSON object via MQTTT subscription flow</summary>
+<p>[{"id":"a0d907e92e526944","type":"mqtt in","z":"c6b51061.867b8","name":"","topic":"/ITS_DATA1","qos":"2","datatype":"auto-detect","broker":"56b1af0c96c4d87c","nl":false,"rap":true,"rh":0,"inputs":0,"x":210,"y":3400,"wires":[["5d3fe6d94494e88b","e8bb6afe89b168de","0ae8290a6c9c91d4"]]},{"id":"5d3fe6d94494e88b","type":"debug","z":"c6b51061.867b8","name":"debug 30","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","targetType":"full","statusVal":"","statusType":"auto","x":420,"y":3460,"wires":[]},{"id":"76ae47b1e8075b61","type":"ui_chart","z":"c6b51061.867b8","name":"","group":"093e33a6a3507d35","order":0,"width":0,"height":0,"label":"chart","chartType":"line","legend":"false","xformat":"HH<img alt="🇲🇲" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f1f2-1f1f2.svg" title=":mm:"/>ss","interpolate":"linear","nodata":"","dot":false,"ymin":"","ymax":"","removeOlder":1,"removeOlderPoints":"","removeOlderUnit":"3600","cutout":0,"useOneColor":false,"useUTC":false,"colors":["#1f77b4","#aec7e8","#ff7f0e","#2ca02c","#98df8a","#d62728","#ff9896","#9467bd","#c5b0d5"],"outputs":1,"useDifferentColor":false,"className":"","x":650,"y":3380,"wires":[[]]},{"id":"e8bb6afe89b168de","type":"change","z":"c6b51061.867b8","name":"crea hum","rules":[{"t":"set","p":"payload","pt":"msg","to":"payload.hum","tot":"msg"},{"t":"set","p":"topic","pt":"msg","to":"hum","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":420,"y":3380,"wires":[["76ae47b1e8075b61"]]},{"id":"0ae8290a6c9c91d4","type":"change","z":"c6b51061.867b8","name":"crea temp","rules":[{"t":"set","p":"payload","pt":"msg","to":"payload.temp","tot":"msg"},{"t":"set","p":"topic","pt":"msg","to":"temp","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":420,"y":3420,"wires":[["76ae47b1e8075b61"]]},{"id":"b8051d554f60dfc1","type":"inject","z":"c6b51061.867b8","name":"Erase Data from Graph","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"[]","payloadType":"json","x":380,"y":3320,"wires":[["76ae47b1e8075b61"]]},{"id":"77fc43ccfe58f250","type":"comment","z":"c6b51061.867b8","name":"receive and display 2 data from a JSON object via MQTTT subscription ","info":"","x":410,"y":3260,"wires":[]},{"id":"56b1af0c96c4d87c","type":"mqtt-broker","name":"","broker":"broker.hivemq.com","port":"1883","clientid":"","autoConnect":true,"usetls":false,"protocolVersion":"4","keepalive":"60","cleansession":true,"birthTopic":"","birthQos":"0","birthPayload":"","birthMsg":{},"closeTopic":"","closeQos":"0","closePayload":"","closeMsg":{},"willTopic":"","willQos":"0","willPayload":"","willMsg":{},"userProps":"","sessionExpiry":""},{"id":"093e33a6a3507d35","type":"ui_group","z":"c6b51061.867b8","name":"Default","tab":"fa4ff03b54b4ec37","order":1,"disp":true,"width":"16","collapse":false,"className":""},{"id":"fa4ff03b54b4ec37","type":"ui_tab","z":"c6b51061.867b8","name":"Home","icon":"dashboard"}]</p>
+</details>
+<h2 id="mqtt-graph-send-receive-with-map">MQTT Graph Send &amp; Receive (with MAP!)<a class="headerlink" href="#mqtt-graph-send-receive-with-map" title="Permanent link">¶</a></h2>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/mqtt-graph-send-receive/mqtt-graph-send-receive.PNG"><img alt="Send and receive data in JSON format" src="https://raw.githubusercontent.com/vongomben/fluid-networks/master/node-red-notes/mqtt-graph-send-receive/mqtt-graph-send-receive.PNG"/></a></p>
+<details class="note">
+<summary>Send and receive data in JSON format Flow</summary>
+<p>[{"id":"911e1869fecf5b9d","type":"mqtt out","z":"c6b51061.867b8","name":"","topic":"/ITS_DATA1","qos":"","retain":"","respTopic":"","contentType":"","userProps":"","correl":"","expiry":"","broker":"d4dbff4e822a7890","x":410,"y":2920,"wires":[]},{"id":"2e3bacc24fd2d6a5","type":"inject","z":"c6b51061.867b8","name":"","props":[{"p":"payload.hum","v":"$random()<em>10","vt":"jsonata"},{"p":"topic","vt":"str"},{"p":"payload.temp","v":"$random()</em>100","vt":"jsonata"},{"p":"payload.name","v":"Sonda-001","vt":"str"},{"p":"payload.lat","v":"45.07","vt":"num"},{"p":"payload.lon","v":"7.69","vt":"num"},{"p":"payload.alert","v":"false","vt":"bool"}],"repeat":"10","crontab":"","once":false,"onceDelay":0.1,"topic":"","x":170,"y":2920,"wires":[["7d73f5b0378a0f89","911e1869fecf5b9d"]]},{"id":"7d73f5b0378a0f89","type":"debug","z":"c6b51061.867b8","name":"debug 29","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","targetType":"full","statusVal":"","statusType":"auto","x":400,"y":3000,"wires":[]},{"id":"efb15b82ea70682f","type":"mqtt in","z":"c6b51061.867b8","name":"","topic":"/ITS_DATA1","qos":"2","datatype":"auto-detect","broker":"d4dbff4e822a7890","nl":false,"rap":true,"rh":0,"inputs":0,"x":650,"y":3020,"wires":[["f89246911df97a93","b136eaac1f22cb46","efd7ac4b9da33971","016ffe85648bff2f"]]},{"id":"f89246911df97a93","type":"debug","z":"c6b51061.867b8","name":"debug 30","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","targetType":"full","statusVal":"","statusType":"auto","x":860,"y":3080,"wires":[]},{"id":"ec4ca21cac0552aa","type":"ui_chart","z":"c6b51061.867b8","name":"","group":"8f913bf37816bd36","order":0,"width":0,"height":0,"label":"Sonda-001","chartType":"line","legend":"false","xformat":"HH<img alt="🇲🇲" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f1f2-1f1f2.svg" title=":mm:"/>ss","interpolate":"linear","nodata":"","dot":false,"ymin":"","ymax":"","removeOlder":1,"removeOlderPoints":"","removeOlderUnit":"3600","cutout":0,"useOneColor":false,"useUTC":false,"colors":["#1f77b4","#aec7e8","#ff7f0e","#2ca02c","#98df8a","#d62728","#ff9896","#9467bd","#c5b0d5"],"outputs":1,"useDifferentColor":false,"className":"","x":1050,"y":3000,"wires":[[]]},{"id":"b136eaac1f22cb46","type":"change","z":"c6b51061.867b8","name":"crea hum","rules":[{"t":"set","p":"payload","pt":"msg","to":"payload.hum","tot":"msg"},{"t":"set","p":"topic","pt":"msg","to":"hum","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":860,"y":3000,"wires":[["ec4ca21cac0552aa"]]},{"id":"efd7ac4b9da33971","type":"change","z":"c6b51061.867b8","name":"crea temp","rules":[{"t":"set","p":"payload","pt":"msg","to":"payload.temp","tot":"msg"},{"t":"set","p":"topic","pt":"msg","to":"temp","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":860,"y":3040,"wires":[["ec4ca21cac0552aa"]]},{"id":"c2a0b4c87be689d9","type":"inject","z":"c6b51061.867b8","name":"Erase Data from Graph","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"[]","payloadType":"json","x":820,"y":2940,"wires":[["ec4ca21cac0552aa"]]},{"id":"e7724859df6597da","type":"comment","z":"c6b51061.867b8","name":"receive and display 2 data from a JSON object via MQTT subscription ","info":"","x":850,"y":2880,"wires":[]},{"id":"95add5cce7b486cf","type":"ui_worldmap","z":"c6b51061.867b8","group":"4d5c65b0d3149f88","order":0,"width":0,"height":0,"name":"","lat":"","lon":"","zoom":"","layer":"OSMG","cluster":"","maxage":"","usermenu":"hide","layers":"hide","panit":"false","panlock":"false","zoomlock":"false","hiderightclick":"true","coords":"none","showgrid":"false","allowFileDrop":"false","path":"/worldmap","overlist":"DR,CO,RA,DN,HM","maplist":"OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS","mapname":"","mapurl":"","mapopt":"","mapwms":false,"x":1300,"y":3120,"wires":[]},{"id":"516a1c4a26c5ecd0","type":"inject","z":"c6b51061.867b8","name":"","props":[{"p":"payload.hum","v":"$random()<em>10","vt":"jsonata"},{"p":"topic","vt":"str"},{"p":"payload.temp","v":"$random()</em>100","vt":"jsonata"},{"p":"payload.name","v":"Sonda-001","vt":"str"},{"p":"payload.lat","v":"45.07","vt":"num"},{"p":"payload.lon","v":"7.69","vt":"num"},{"p":"payload.alert","v":"true","vt":"bool"}],"repeat":"25","crontab":"","once":false,"onceDelay":0.1,"topic":"","x":170,"y":2980,"wires":[["911e1869fecf5b9d"]]},{"id":"016ffe85648bff2f","type":"switch","z":"c6b51061.867b8","name":"check alert","property":"payload.alert","propertyType":"msg","rules":[{"t":"true"},{"t":"false"}],"checkall":"true","repair":false,"outputs":2,"x":870,"y":3140,"wires":[["31afa11621978774"],["da90f2f23f11deb9"]]},{"id":"31afa11621978774","type":"change","z":"c6b51061.867b8","name":"icona teschio","rules":[{"t":"set","p":"payload.icon","pt":"msg","to":"<img alt="💀" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f480.svg" title=":skull:"/>","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":1050,"y":3120,"wires":[["95add5cce7b486cf"]]},{"id":"da90f2f23f11deb9","type":"change","z":"c6b51061.867b8","name":"icona map marker","rules":[{"t":"set","p":"payload.icon","pt":"msg","to":"fa-map-marker","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":1070,"y":3160,"wires":[["95add5cce7b486cf"]]},{"id":"469cd929f26bbbb4","type":"comment","z":"c6b51061.867b8","name":"send  2 data from a JSON object via MQTT (with alert)","info":"","x":260,"y":2880,"wires":[]},{"id":"d4dbff4e822a7890","type":"mqtt-broker","name":"","broker":"broker.hivemq.com","port":"1883","clientid":"","autoConnect":true,"usetls":false,"protocolVersion":"4","keepalive":"60","cleansession":true,"birthTopic":"","birthQos":"0","birthPayload":"","birthMsg":{},"closeTopic":"","closeQos":"0","closePayload":"","closeMsg":{},"willTopic":"","willQos":"0","willPayload":"","willMsg":{},"userProps":"","sessionExpiry":""},{"id":"8f913bf37816bd36","type":"ui_group","z":"c6b51061.867b8","name":"Default","tab":"fa4ff03b54b4ec37","order":1,"disp":true,"width":"16","collapse":false,"className":""},{"id":"4d5c65b0d3149f88","type":"ui_group","name":"map","tab":"fa4ff03b54b4ec37","order":2,"disp":true,"width":"12","collapse":false,"className":""},{"id":"fa4ff03b54b4ec37","type":"ui_tab","z":"c6b51061.867b8","name":"Home","icon":"dashboard"}]</p>
+</details>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Kit" class="md-footer__link md-footer__link--prev" href="../kit/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+              Kit
+            </div>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://twitter.com/vongomben" rel="noopener" target="_blank" title="twitter.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.instant", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+<script src="../assets/javascripts/bundle.d6c3db9e.min.js"></script>
+<script src="../javascripts/extra.js"></script>
+<script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+<script src="../javascripts/tablesort.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
