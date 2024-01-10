@@ -1,6 +1,6 @@
  Fluid Networks
 
-An Physical Computing and Internet of Things workshop from [Officine Innesto](https://officine.cc/) and held by [Davide Gomba](https://twitter.com/vongomben)
+A Physical Computing and Internet of Things workshop from [Officine Innesto](https://officine.cc/) and held by [Davide Gomba](https://twitter.com/vongomben)
 
 This repository is meant as a [Node-RED](https://nodered.org/) and Microcontrollers (mainly based on [Arduino](https://arduino.cc/))
 
