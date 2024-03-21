@@ -1,0 +1,582 @@
+[
+    {
+        "id": "0678552d01c3e785",
+        "type": "ui_form",
+        "z": "c187c780edf57197",
+        "name": "",
+        "label": "",
+        "group": "c6197ae0ab46191b",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "luogo",
+                "value": "location",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "coordinate",
+                "value": "coord",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "location": "",
+            "coord": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 370,
+        "y": 1060,
+        "wires": [
+            [
+                "ce8ac2861e9d5eaa",
+                "3f2f1dfdc335a65d",
+                "e7a2d99fb9f89c4f"
+            ]
+        ]
+    },
+    {
+        "id": "ce8ac2861e9d5eaa",
+        "type": "ui_text",
+        "z": "c187c780edf57197",
+        "group": "5ffd6a5f6d9b655e",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 550,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "3f2f1dfdc335a65d",
+        "type": "debug",
+        "z": "c187c780edf57197",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "24a110edbdfb392e",
+        "type": "comment",
+        "z": "c187c780edf57197",
+        "name": "Input Mappa",
+        "info": "",
+        "x": 370,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "4686e49036b0585b",
+        "type": "worldmap",
+        "z": "c187c780edf57197",
+        "name": "",
+        "lat": "44.549573580368936",
+        "lon": "7.721281494168574",
+        "zoom": "13",
+        "layer": "NatGeo",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN",
+        "maplist": "OSMG,OSMC,OSMH,EsriC,EsriS,EsriT,EsriO,EsriDG,NatGeo,UKOS,OpTop,HB,AN,ST,SW",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 540,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "e1416eb28d0325ed",
+        "type": "inject",
+        "z": "c187c780edf57197",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"name\":\"Luciano\", \"lat\":44.54584229197435, \"lon\":7.731409514971728}",
+        "payloadType": "json",
+        "x": 430,
+        "y": 1720,
+        "wires": [
+            [
+                "4686e49036b0585b",
+                "b640f11438ac25a1"
+            ]
+        ]
+    },
+    {
+        "id": "0e8d5a5c718e98c1",
+        "type": "comment",
+        "z": "c187c780edf57197",
+        "name": "Output Mappa",
+        "info": "",
+        "x": 410,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "b640f11438ac25a1",
+        "type": "ui_worldmap",
+        "z": "c187c780edf57197",
+        "group": "5ffd6a5f6d9b655e",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "lat": "44.549573580368936",
+        "lon": "7.721281494168574",
+        "zoom": "13",
+        "layer": "OSMC",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "hide",
+        "layers": "hide",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 540,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "df9195a3f7ea44d8",
+        "type": "inject",
+        "z": "c187c780edf57197",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"location\":\"luciano\",\"coord\":\"44.54932891295587, 7.689481224182464\"}",
+        "payloadType": "json",
+        "x": 390,
+        "y": 1160,
+        "wires": [
+            [
+                "e7a2d99fb9f89c4f",
+                "faf1c462b9ec19d8"
+            ]
+        ]
+    },
+    {
+        "id": "5e3afd91d278b3f5",
+        "type": "debug",
+        "z": "c187c780edf57197",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "e7a2d99fb9f89c4f",
+        "type": "change",
+        "z": "c187c780edf57197",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "flow",
+                "to": "payload.location",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 1260,
+        "wires": [
+            [
+                "5e3afd91d278b3f5",
+                "b518581fc1540dff"
+            ]
+        ]
+    },
+    {
+        "id": "faf1c462b9ec19d8",
+        "type": "debug",
+        "z": "c187c780edf57197",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "70f0ddcac2baf387",
+        "type": "split",
+        "z": "c187c780edf57197",
+        "name": "",
+        "splt": ", ",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 530,
+        "y": 1400,
+        "wires": [
+            [
+                "f2b1fc1c33dc5138",
+                "9dc17f3cc9bd934d"
+            ]
+        ]
+    },
+    {
+        "id": "409bf05fe98f7262",
+        "type": "debug",
+        "z": "c187c780edf57197",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "2366e3bfad5abf9a",
+        "type": "inject",
+        "z": "c187c780edf57197",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "44.535228221346415, 7.727032149551989",
+        "payloadType": "str",
+        "x": 350,
+        "y": 1400,
+        "wires": [
+            [
+                "70f0ddcac2baf387"
+            ]
+        ]
+    },
+    {
+        "id": "b518581fc1540dff",
+        "type": "change",
+        "z": "c187c780edf57197",
+        "name": "le coordinate diventano il payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.coord",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 1320,
+        "wires": [
+            [
+                "70f0ddcac2baf387"
+            ]
+        ]
+    },
+    {
+        "id": "f2b1fc1c33dc5138",
+        "type": "switch",
+        "z": "c187c780edf57197",
+        "name": "",
+        "property": "parts.index",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 350,
+        "y": 1540,
+        "wires": [
+            [
+                "05ddd567da3cbccb"
+            ],
+            [
+                "2f7b42a9e40ce336"
+            ]
+        ]
+    },
+    {
+        "id": "05ddd567da3cbccb",
+        "type": "change",
+        "z": "c187c780edf57197",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lat",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 1520,
+        "wires": [
+            [
+                "409bf05fe98f7262"
+            ]
+        ]
+    },
+    {
+        "id": "2f7b42a9e40ce336",
+        "type": "change",
+        "z": "c187c780edf57197",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lon",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 1560,
+        "wires": [
+            [
+                "409bf05fe98f7262",
+                "89ba07d452036186"
+            ]
+        ]
+    },
+    {
+        "id": "5d3d385457380bc3",
+        "type": "comment",
+        "z": "c187c780edf57197",
+        "name": "TODO: Bisogna castare lat e lon come numeri --> usiamo le Variabili di contesto",
+        "info": "",
+        "x": 500,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "9dc17f3cc9bd934d",
+        "type": "debug",
+        "z": "c187c780edf57197",
+        "name": "debug 8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "e76c3540ac39fe44",
+        "type": "comment",
+        "z": "c187c780edf57197",
+        "name": "TODO: mantenere in qualche modo il name --> Usiamo Flow, variabile di contesto",
+        "info": "",
+        "x": 540,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "89ba07d452036186",
+        "type": "template",
+        "z": "c187c780edf57197",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"name\":\"{{flow.name}}\",\n \"lat\":{{flow.lat}},\n \"lon\":{{flow.lon}}}",
+        "output": "json",
+        "x": 460,
+        "y": 1600,
+        "wires": [
+            [
+                "65bda9fc610000ce",
+                "b640f11438ac25a1"
+            ]
+        ]
+    },
+    {
+        "id": "65bda9fc610000ce",
+        "type": "debug",
+        "z": "c187c780edf57197",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "c6197ae0ab46191b",
+        "type": "ui_group",
+        "name": "input",
+        "tab": "518b0fb6d1a009d4",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5ffd6a5f6d9b655e",
+        "type": "ui_group",
+        "name": "output",
+        "tab": "518b0fb6d1a009d4",
+        "order": 2,
+        "disp": true,
+        "width": "13",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "518b0fb6d1a009d4",
+        "type": "ui_tab",
+        "name": "Il mio primo sito!",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
