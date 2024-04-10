@@ -1,25 +1,161 @@
 [
     {
-        "id": "d399a1188ae9957e",
-        "type": "debug",
-        "z": "1ae94b859e627067",
+        "id": "a0d907e92e526944",
+        "type": "mqtt in",
+        "z": "77350c7580de25cb",
         "name": "",
+        "topic": "/ITS_DATA1",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "020f27e0b0deb2a5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 990,
+        "y": 4920,
+        "wires": [
+            [
+                "5d3fe6d94494e88b",
+                "e8bb6afe89b168de",
+                "0ae8290a6c9c91d4"
+            ]
+        ]
+    },
+    {
+        "id": "5d3fe6d94494e88b",
+        "type": "debug",
+        "z": "77350c7580de25cb",
+        "name": "debug 30",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 830,
-        "y": 2000,
+        "x": 1200,
+        "y": 4980,
         "wires": []
     },
     {
-        "id": "293a95dbd1bb48c5",
+        "id": "76ae47b1e8075b61",
+        "type": "ui_chart",
+        "z": "77350c7580de25cb",
+        "name": "",
+        "group": "093e33a6a3507d35",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH🇲🇲ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1430,
+        "y": 4900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e8bb6afe89b168de",
+        "type": "change",
+        "z": "77350c7580de25cb",
+        "name": "crea hum",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.hum",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "hum",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1200,
+        "y": 4900,
+        "wires": [
+            [
+                "76ae47b1e8075b61"
+            ]
+        ]
+    },
+    {
+        "id": "0ae8290a6c9c91d4",
+        "type": "change",
+        "z": "77350c7580de25cb",
+        "name": "crea temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temp",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "temp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1200,
+        "y": 4940,
+        "wires": [
+            [
+                "76ae47b1e8075b61"
+            ]
+        ]
+    },
+    {
+        "id": "b8051d554f60dfc1",
         "type": "inject",
-        "z": "1ae94b859e627067",
-        "name": "starting json",
+        "z": "77350c7580de25cb",
+        "name": "Erase Data from Graph",
         "props": [
             {
                 "p": "payload"
@@ -34,30 +170,92 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\"alert\":1,\"text\":\"ciao\",\"lat\":45.43912451944641,\"lon\":7.827994525543856}",
+        "payload": "[]",
         "payloadType": "json",
-        "x": 450,
-        "y": 2000,
+        "x": 1160,
+        "y": 4840,
         "wires": [
             [
-                "b98213de27fa7cd6",
-                "f95b7dcb90cf1987",
-                "b9b1f098eb50d9c5"
+                "76ae47b1e8075b61"
             ]
         ]
     },
     {
-        "id": "b98213de27fa7cd6",
+        "id": "77fc43ccfe58f250",
+        "type": "comment",
+        "z": "77350c7580de25cb",
+        "name": "receive and display 2 data from a JSON object via MQTTT subscription ",
+        "info": "",
+        "x": 1190,
+        "y": 4780,
+        "wires": []
+    },
+    {
+        "id": "34d879d77c52ace9",
+        "type": "inject",
+        "z": "77350c7580de25cb",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"hum\":\"\",\"temp\":\"\"}",
+        "payloadType": "json",
+        "x": 1000,
+        "y": 5040,
+        "wires": [
+            [
+                "88e28bfba67e65d4"
+            ]
+        ]
+    },
+    {
+        "id": "050edb8b5c102a79",
+        "type": "mqtt out",
+        "z": "77350c7580de25cb",
+        "name": "",
+        "topic": "/ITS_DATA1",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "020f27e0b0deb2a5",
+        "x": 1410,
+        "y": 5040,
+        "wires": []
+    },
+    {
+        "id": "88e28bfba67e65d4",
         "type": "change",
-        "z": "1ae94b859e627067",
-        "name": "change",
+        "z": "77350c7580de25cb",
+        "name": "",
         "rules": [
             {
                 "t": "set",
-                "p": "payload.diga",
+                "p": "payload.hum",
                 "pt": "msg",
-                "to": "true",
-                "tot": "bool"
+                "to": "$random()*10",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload.temp",
+                "pt": "msg",
+                "to": "$random()*100",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -65,60 +263,77 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 640,
-        "y": 1960,
+        "x": 1200,
+        "y": 5060,
         "wires": [
             [
-                "d399a1188ae9957e"
+                "050edb8b5c102a79",
+                "fdd2a334b94c19d3"
             ]
         ]
     },
     {
-        "id": "f95b7dcb90cf1987",
-        "type": "template",
-        "z": "1ae94b859e627067",
-        "name": "Template",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "json",
-        "syntax": "mustache",
-        "template": "{\n    \"alert\":\"{{payload.alert}}\",\n    \"text\":\"{{payload.text}}\",\n    \"lat\":{{payload.lat}},\n    \"lon\":{{payload.lon}},\n    \"diga\": true\n}\n\n\n\n",
-        "output": "json",
-        "x": 640,
-        "y": 2000,
-        "wires": [
-            [
-                "d399a1188ae9957e"
-            ]
-        ]
-    },
-    {
-        "id": "b9b1f098eb50d9c5",
-        "type": "function",
-        "z": "1ae94b859e627067",
-        "name": "Function",
-        "func": "msg.payload.diga = true; \nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 640,
-        "y": 2040,
-        "wires": [
-            [
-                "d399a1188ae9957e"
-            ]
-        ]
-    },
-    {
-        "id": "ee67c92cd8c37f85",
-        "type": "comment",
-        "z": "1ae94b859e627067",
-        "name": "Adding a JSON parameter, \"Diga\" as \"True\" on the go (in 3 ways)",
-        "info": "",
-        "x": 650,
-        "y": 1900,
+        "id": "fdd2a334b94c19d3",
+        "type": "debug",
+        "z": "77350c7580de25cb",
+        "name": "debug 31",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1400,
+        "y": 5100,
         "wires": []
+    },
+    {
+        "id": "020f27e0b0deb2a5",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.emqx.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "093e33a6a3507d35",
+        "type": "ui_group",
+        "z": "77350c7580de25cb",
+        "name": "Default",
+        "tab": "fa4ff03b54b4ec37",
+        "order": 1,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fa4ff03b54b4ec37",
+        "type": "ui_tab",
+        "z": "77350c7580de25cb",
+        "name": "Home",
+        "icon": "dashboard"
     }
 ]
