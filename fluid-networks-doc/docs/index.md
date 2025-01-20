@@ -22,3 +22,4 @@ The goal is giving all students the same, personal, one to one educational exper
 
 The Fluid Networks Workshop has been developed and tested during the first Pandemic in 2020, and addressed to several [Istituto Marangoni](https://www.istitutomarangoni.com/en) students, while is being reshaped for Mozilla / Northumrbia University Open Hardware Workshop for the [OpenDoTT PhD Programme](https://opendott.org/) ad well as being used for the first and second year of [Cloud Computing as Internet of Things Development Kit at the ITS ICT of Turin](https://www.its-ictpiemonte.it/corsi/cloud-specialist/), [ITS Biotecnologie](https://www.its-biotecnologiepiemonte.it/) and more. 
 
+[TOC]
