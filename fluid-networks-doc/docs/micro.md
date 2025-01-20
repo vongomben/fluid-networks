@@ -8,6 +8,14 @@ After introducing the different parts of the kit, we started discovering the dif
 Later, we primarly focused on making the board connecrting to the internet, [sending readings in JSON format, using MQTT](https://github.com/vongomben/fluid-networks/blob/master/23_Wio-Terminal-Json-over-MQTT/23_Wio-Terminal-Json-over-MQTT.ino), also [using the screen](https://github.com/vongomben/fluid-networks/blob/master/24_Wio-Terminal-Json-over-MQTT-screen/24_Wio-Terminal-Json-over-MQTT-screen.ino).  
 
 
+### Wio Terminal 
+
+- [30 Wio Light Basic](https://github.com/vongomben/fluid-networks/tree/master/microntrollers/30_Wio_Light_basic)
+- [30 Wio Light Distance](https://github.com/vongomben/fluid-networks/tree/master/microntrollers/30_Wio_Light_Distance)
+
+![wio distance](https://raw.githubusercontent.com/vongomben/fluid-networks/refs/heads/master/microntrollers/30_Wio_Light_Distance/dist-2.JPG)
+
+
 ## Examples (for MKR 1010)
 
 Most examples start with a number, and are willing to give a concise and self-explanatory guide to use the sensor with the corresponding board of the kit hookoed up with the MKR Connector Carrier-
