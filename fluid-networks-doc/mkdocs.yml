@@ -5,6 +5,7 @@ nav:
     - Microcontrollers: micro.md
     - Kit: kit.md
     - Node-RED: node-red-notes.md
+    - Touch-Designer: td.md
 
 theme:
   name: material
@@ -37,6 +38,7 @@ theme:
     - toc.integrate 
     - content.code.annotate 
     - toc.follow
+    - content.code.copy
   language: en
   palette: 
     # Palette toggle for dark mode
@@ -65,11 +67,15 @@ markdown_extensions:
   - attr_list
   - admonition
   - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
   - pymdownx.superfences
 #  - pymdownx.emoji:
 #      emoji_index: !!python/name:materialx.emoji.twemoji
 #      emoji_generator: !!python/name:materialx.emoji.to_svg
   - tables
+  - pymdownx.snippets:
+      base_path: ..
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
